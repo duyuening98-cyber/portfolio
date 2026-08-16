@@ -1,0 +1,1572 @@
+<!DOCTYPE html>
+
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>个人作品集</title>
+<style>
+  :root{
+    --bg1:#f4eee8;
+    --bg2:#eef3ed;
+    --card:#ffffff;
+    --line:#ece5dd;
+    --text:#1f2328;
+    --muted:#6f6b66;
+    --accent:#c79d72;
+    --accent-soft:#f6ede4;
+    --pill:#f8f5f1;
+    --dark:#2d2a28;
+    --shadow:0 12px 30px rgba(33, 28, 23, .06);
+    --radius-xl:28px;
+    --radius-lg:22px;
+    --radius-md:16px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{
+    font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+    color:var(--text);
+    background: linear-gradient(120deg,var(--bg1),var(--bg2));
+  }
+  a{text-decoration:none;color:inherit}
+  .wrap{width:min(1280px, calc(100% - 36px)); margin:14px auto 40px;}
+  .nav{
+    background:rgba(255,255,255,.92);
+    backdrop-filter: blur(10px);
+    border:1px solid rgba(255,255,255,.65);
+    border-radius:999px;
+    padding:14px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:18px;
+    box-shadow: var(--shadow);
+    position:sticky;
+    top:12px;
+    z-index:20;
+  }
+  .brand{
+    display:flex;align-items:center;gap:14px;min-width:180px;
+    letter-spacing:.16em;font-weight:800;font-size:14px;
+  }
+  .brand-badge{
+    width:34px;height:34px;border-radius:50%;
+    background:linear-gradient(135deg,#2e2b28,#9d876c);
+    box-shadow: inset 0 0 0 2px rgba(255,255,255,.6);
+  }
+  .nav-tabs{
+    display:flex;gap:10px;flex-wrap:wrap;justify-content:center;flex:1;
+  }
+  .nav-tab{
+    border:none;background:transparent;color:#47423d;
+    padding:12px 18px;border-radius:999px;font-size:15px;font-weight:700;
+    cursor:pointer;
+  }
+  .nav-tab.active{background:var(--dark);color:#fff;}
+  .nav-cta{
+    border:1.5px solid var(--dark);border-radius:999px;
+    padding:12px 20px;font-weight:700;background:#fff;white-space:nowrap;
+  }
+
+  .pane{display:none;padding-top:18px}
+  .pane.active{display:block}
+  .hero{
+    min-height: calc(100vh - 120px);
+    display:grid;
+    align-items:center;
+    grid-template-columns: 1.1fr .9fr;
+    gap:34px;
+    padding:18px 6px 34px;
+  }
+  .hello{
+    display:inline-flex;align-items:center;gap:10px;
+    background:rgba(255,255,255,.6);border:1px solid #efe7de;
+    border-radius:999px;padding:10px 18px;font-size:14px;
+    color:#5c5853;font-weight:700;
+  }
+  .hello::before{
+    content:"";
+    width:10px;height:10px;border-radius:50%;background:#84807b;
+  }
+  .hero h1{
+    font-size:92px;line-height:.96;letter-spacing:-.05em;margin:22px 0 12px;
+  }
+  .hero-sub{
+    font-size:18px;color:#b08b65;font-weight:800;margin-bottom:22px;
+  }
+  .quote{
+    background:rgba(255,255,255,.56);
+    border:1px solid var(--line);
+    border-radius:22px;
+    padding:22px 24px;
+    color:#6a645f;
+    line-height:1.9;
+    box-shadow: var(--shadow);
+  }
+  .hero-desc{
+    margin:22px 0 0;
+    font-size:17px;line-height:1.95;color:#4e4a46;
+    max-width:720px;
+  }
+  .chips{
+    display:flex;gap:12px;flex-wrap:wrap;margin-top:20px;
+  }
+  .chip{
+    background:rgba(255,255,255,.75);
+    border:1px solid var(--line);
+    border-radius:999px;padding:11px 18px;
+    font-size:14px;color:#5a554f;
+    box-shadow: 0 4px 10px rgba(50,40,30,.03);
+  }
+  .hero-actions{display:flex;gap:16px;flex-wrap:wrap;margin-top:26px}
+  .btn-dark,.btn-light{
+    padding:14px 28px;border-radius:999px;font-weight:800;
+    border:1.5px solid var(--dark);display:inline-flex;align-items:center;justify-content:center;
+  }
+  .btn-dark{background:var(--dark);color:#fff}
+  .btn-light{background:transparent;color:var(--dark)}
+  .hero-right{
+    align-self:center;
+  }
+  .info-card{
+    background:rgba(255,255,255,.72);
+    border:1px solid var(--line);
+    border-radius:32px;
+    padding:28px;
+    min-height:470px;
+    box-shadow: var(--shadow);
+    display:flex;flex-direction:column;justify-content:space-between;
+  }
+  .grid-2{
+    display:grid;grid-template-columns:1fr 1fr;gap:14px;
+  }
+  .mini-card{
+    background:#fff;border:1px solid #efe7de;border-radius:20px;
+    padding:18px;box-shadow: 0 4px 10px rgba(50,40,30,.03);
+  }
+  .mini-card .label{font-size:12px;color:#b08b65;font-weight:800;letter-spacing:.12em}
+  .mini-card .value{font-size:22px;font-weight:800;margin-top:10px}
+  .mini-card p{margin:8px 0 0;color:#6b6661;line-height:1.7;font-size:13px}
+  .big-note{
+    background:linear-gradient(145deg,#faf5ee,#f8faf6);
+    border:1px dashed #deccb9;
+    border-radius:24px;padding:22px;
+  }
+  .big-note h3{margin:0 0 10px;font-size:20px}
+  .big-note p{margin:0;color:#615b55;line-height:1.85}
+  .section-head{
+    text-align:center;
+    padding:26px 0 10px;
+  }
+  .section-index{
+    color:#b08b65;font-weight:800;letter-spacing:.22em;font-size:14px;
+  }
+  .section-head h2{
+    margin:14px 0 18px;
+    font-size:68px;line-height:1.06;letter-spacing:-.04em;
+  }
+  .section-head p{
+    margin:0 auto;max-width:860px;color:#6d6760;font-size:17px;line-height:1.9;
+  }
+
+  .edu-cards{
+    margin-top:34px;
+    display:grid;grid-template-columns:1fr 72px 1fr;gap:26px;align-items:center;
+  }
+  .path{
+    color:#b7a390;font-size:32px;text-align:center;
+  }
+  .edu-card{
+    background:rgba(255,255,255,.8);
+    border:1px solid var(--line);
+    border-radius:26px;
+    overflow:hidden;
+    box-shadow: var(--shadow);
+  }
+  .edu-cover{
+    height:240px;
+    background:linear-gradient(135deg,#89b7ec,#dbeef8);
+    display:flex;align-items:end;justify-content:center;
+    color:#fff;font-size:36px;font-weight:900;letter-spacing:.04em;
+    padding:20px;text-shadow:0 3px 8px rgba(0,0,0,.16);
+  }
+  .edu-cover.alt{background:linear-gradient(135deg,#98c7ff,#b1d8ae)}
+  .edu-body{padding:24px 26px 26px}
+  .edu-time{color:#ba9875;font-size:15px;font-weight:800}
+  .edu-meta{margin-top:10px;color:#8d857d;font-size:14px}
+  .edu-school{font-size:24px;font-weight:900;margin:14px 0 10px}
+  .edu-desc{color:#66615b;line-height:1.85;font-size:14px}
+
+  .panel-card{
+    background:rgba(255,255,255,.78);
+    border:1px solid var(--line);
+    border-radius:28px;
+    padding:30px 34px;
+    box-shadow: var(--shadow);
+    margin-top:28px;
+  }
+  .block-title{font-size:30px;font-weight:900;margin:0 0 20px}
+  .tags-list{display:flex;flex-wrap:wrap;gap:14px}
+  .tag{
+    display:inline-flex;align-items:center;gap:10px;
+    padding:14px 18px;border-radius:999px;
+    background:rgba(255,255,255,.84);border:1px solid #efe6dc;
+    color:#4f4943;
+  }
+  .courses{
+    display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:20px;
+  }
+  .course{
+    background:#fbfaf8;border:1px solid #f0e7de;border-radius:16px;padding:18px 18px;
+    display:flex;justify-content:space-between;gap:10px;font-size:14px;
+  }
+  .course b{font-size:18px;color:#bf9972}
+
+  .timeline{
+    margin:34px auto 0;max-width:1120px;position:relative;
+  }
+  .timeline::before{
+    content:"";position:absolute;left:18px;top:0;bottom:0;width:2px;background:#d7c1aa;
+  }
+  .timeline-item{
+    position:relative;padding-left:62px;margin-bottom:28px;
+  }
+  .timeline-dot{
+    position:absolute;left:0;top:16px;width:38px;height:38px;border-radius:50%;
+    background:#c89d71;color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;
+    box-shadow:0 4px 10px rgba(180,130,85,.24);
+  }
+  .timeline-card{
+    background:rgba(255,255,255,.8);
+    border:1px solid var(--line);
+    border-radius:28px;padding:28px 30px;box-shadow:var(--shadow);
+  }
+  .time{color:#b48f69;font-weight:800;font-size:15px}
+  .company{font-size:24px;font-weight:900;margin-top:12px}
+  .role{
+    display:inline-block;margin-top:12px;padding:8px 14px;border-radius:999px;
+    background:#fbefe3;color:#b6885c;font-weight:800;font-size:13px;
+  }
+  .timeline-card ul{margin:18px 0 0 18px;padding:0;color:#58524d;line-height:1.9}
+  .timeline-card li{margin-bottom:6px}
+
+  .project-switch{
+    margin:26px auto 0;display:flex;justify-content:center;gap:10px;flex-wrap:wrap;
+  }
+  .switch-btn{
+    border:none;background:rgba(255,255,255,.82);border:1px solid var(--line);
+    padding:12px 18px;border-radius:999px;font-weight:800;color:#5a554f;cursor:pointer;
+  }
+  .switch-btn.active{background:var(--dark);color:#fff;border-color:var(--dark)}
+  .project-pane{display:none;margin-top:26px}
+  .project-pane.active{display:block}
+  .project-card{
+    background:rgba(255,255,255,.8);
+    border:1px solid var(--line);
+    border-radius:30px;
+    padding:34px;
+    box-shadow:var(--shadow);
+  }
+  .project-grid{
+    display:grid;grid-template-columns:1.06fr .94fr;gap:26px;align-items:start;
+  }
+  .project-label{color:#b08b65;font-weight:800;letter-spacing:.15em;font-size:14px}
+  .project-title{font-size:42px;font-weight:900;margin:10px 0 14px}
+  .project-desc{color:#5f5954;line-height:1.9;font-size:15px}
+  .project-points{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:18px}
+  .point{
+    background:#fcfaf7;border:1px solid #efe7de;border-radius:18px;padding:16px;
+  }
+  .point b{display:block;margin-bottom:8px}
+  .point span{color:#6a645f;font-size:14px;line-height:1.7}
+  .mock-window{
+    background:#f8f6f3;border:1px solid #ece3d8;border-radius:22px;padding:18px;
+  }
+  .window-top{
+    display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;color:#746d66;font-size:13px
+  }
+  .dotset{display:flex;gap:7px}
+  .dot{width:9px;height:9px;border-radius:50%;background:#d8ccc1}
+  .db-preview{
+    border-radius:18px;background:#fff;border:1px solid #ece3d8;overflow:hidden;
+  }
+  .db-header{
+    background:linear-gradient(90deg,#335dd9,#6b8eff);
+    color:#fff;padding:16px 18px;
+  }
+  .db-header h4{margin:0;font-size:18px}
+  .db-header p{margin:6px 0 0;font-size:12px;opacity:.88}
+  .db-body{padding:16px}
+  .db-kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+  .db-kpi{background:#fbfbfd;border:1px solid #edf0f5;border-radius:14px;padding:14px}
+  .db-kpi label{display:block;font-size:12px;color:#777}
+  .db-kpi strong{display:block;font-size:24px;margin:8px 0 5px}
+  .db-kpi small{color:#7b8b7c}
+  .db-table{
+    margin-top:12px;
+    background:#fbfbfd;border:1px solid #edf0f5;border-radius:14px;padding:12px;
+  }
+  .db-row{display:grid;grid-template-columns:1.5fr 1fr 1fr 1fr;gap:10px;padding:10px 0;border-bottom:1px solid #f0f2f6;font-size:13px;color:#5a5550}
+  .db-row:last-child{border-bottom:none}
+  .db-row.head{font-weight:800;color:#76706a}
+  .db-chart{
+    margin-top:12px;height:160px;border-radius:14px;background:linear-gradient(180deg,#fafbff,#fff);border:1px solid #edf0f5;position:relative;overflow:hidden;
+  }
+  .db-chart svg{width:100%;height:100%}
+  .skills-grid{
+    display:grid;grid-template-columns:1fr 1fr;gap:24px;margin-top:34px;
+  }
+  .skill-box{
+    background:rgba(255,255,255,.8);
+    border:1px solid var(--line);
+    border-radius:28px;padding:28px 30px;
+    box-shadow: var(--shadow);
+  }
+  .skill-box h3{margin:0 0 18px;font-size:28px}
+  .skill-box .tags-list .tag{padding:12px 16px}
+  .contact-card{
+    margin-top:30px;
+    background:rgba(255,255,255,.8);
+    border:1px solid var(--line);
+    border-radius:26px;padding:26px 28px;
+    box-shadow: var(--shadow);
+  }
+  .contact-card h3{margin:0 0 12px;font-size:28px}
+  .contact-card p{margin:0;color:#66615b;line-height:1.8}
+  .footer-note{
+    text-align:center;color:#8a837c;font-size:12px;padding:14px 0 8px;
+  }
+
+  @media (max-width: 1080px){
+    .hero{grid-template-columns:1fr}
+    .project-grid,.skills-grid,.db-kpis,.courses,.grid-2{grid-template-columns:1fr 1fr}
+    .edu-cards{grid-template-columns:1fr}
+    .path{display:none}
+  }
+  @media (max-width: 760px){
+    .nav{border-radius:28px;align-items:flex-start;flex-direction:column}
+    .nav-tabs{justify-content:flex-start}
+    .hero h1{font-size:62px}
+    .section-head h2{font-size:46px}
+    .project-title{font-size:34px}
+    .project-grid,.skills-grid,.db-kpis,.courses,.project-points,.grid-2{grid-template-columns:1fr}
+    .timeline::before{left:15px}
+    .timeline-dot{width:32px;height:32px;font-size:13px}
+    .timeline-item{padding-left:52px}
+  }
+
+.brand-badge{display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:900;letter-spacing:0}
+
+.project-intro-clean{
+  max-width:980px;
+  margin:0 auto 24px;
+}
+.project-intro-clean .project-title{
+  margin-top:8px;
+}
+.interactive-label{
+  margin:8px 0 12px;
+  color:#b08b65;
+  font-size:13px;
+  font-weight:800;
+  letter-spacing:.08em;
+}
+.dashboard-frame{
+  width:100%;
+  height:900px;
+  border:1px solid #e8dfd5;
+  border-radius:22px;
+  background:#f4f6fa;
+  box-shadow:0 8px 24px rgba(35,30,25,.06);
+  display:block;
+}
+.dashboard-note{
+  margin-top:12px;
+  color:#8a837c;
+  font-size:12px;
+  line-height:1.7;
+}
+@media(max-width:900px){
+  .dashboard-frame{height:1050px}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+<nav class="nav">
+<div class="brand">
+<div class="brand-badge" style="background:#2d2a28;position:relative;">D</div>
+<div>DU YUENING · PORTFOLIO</div>
+</div>
+<div class="nav-tabs">
+<button class="nav-tab active" data-target="about">关于我</button>
+<button class="nav-tab" data-target="experience">工作经历</button>
+<button class="nav-tab" data-target="projects">项目展示</button>
+<button class="nav-tab" data-target="skills">技能特长</button>
+</div>
+<a class="nav-cta" href="mailto:duyuening0198@163.com">联系我</a>
+</nav>
+<section class="pane active" id="about">
+<div class="hero" style="grid-template-columns:1fr;max-width:980px;margin:0 auto;min-height:calc(100vh - 120px);">
+<div>
+<div class="hello">HELLO / 你好</div>
+<h1 style="font-size:88px;margin-bottom:10px;">杜玥凝</h1>
+<div class="hero-sub">Chloe Du · Portfolio</div>
+<div class="quote"><b>关于我 /</b><br/>华东师范大学国际中文教育硕士在读，本科毕业于南京师范大学汉语言文学。先后在小红书与阅文集团实习，积累了商家运营、内容分发、数据分析与看板搭建相关实践。</div>
+<p class="hero-desc">我更关注把具体业务问题拆清楚：先明确目标与指标，再通过数据、运营动作和工具完成落地。这个作品集主要展示我的实习经历，以及两套经过脱敏重构的业务看板案例。</p>
+<div class="chips"><div class="chip">小红书｜行业运营</div><div class="chip">阅文集团｜内容运营</div><div class="chip">Excel / SQL</div><div class="chip">CET-6 642</div></div>
+<div class="hero-actions">
+<button class="btn-dark jump" data-target="projects">查看项目</button>
+<a class="btn-light" href="mailto:duyuening0198@163.com">联系我</a>
+</div>
+</div>
+</div>
+</section>
+<section class="pane" id="experience">
+<div class="section-head">
+<div class="section-index">02 / EXPERIENCE</div>
+<h2>我在过往实习做过什么</h2>
+<p>挑选与目标岗位最相关的经历，重点强调业务场景、我负责的工作，以及能够体现结果和方法的部分。</p>
+</div>
+<div class="timeline">
+<div class="timeline-item">
+<div class="timeline-dot">01</div>
+<div class="timeline-card">
+<div class="time">2026.04 — 2026.08</div>
+<div class="company">小红书</div>
+<div class="role">行业运营实习生</div>
+<ul><li>负责行业电商广告经营数据监控与周度复盘，拆解消耗、ROI、CPM 等核心指标，并从链路、场域、赛道及客户分层等维度定位异常与掉量问题。</li><li>参与广告增长策略迭代，使用 AI 搭建广告客户投放诊断产品，形成结构化诊断报告并触达 300+ 头部客户，作为广告增长专项的一环，推动双月广告流水同比 +10%。</li><li>主导四行业中小商家店播批量化培育，使用 AI 产出行业双周榜单、店播周战报等产品，并沉淀直播间搭建、主播话术、选品结构等知识卡片。</li><li>主导多场线上选品会并协助线下选品会，累计触达 100+ 商家、100+ 买手，撮合成交 GMV 100 万+；整合买手与优质商家信息，累计撮合成交 GMV 170 万+。</li><li>使用 AI 搭建并迭代广告、店播、K 播、商笔等核心场域经营 APP，沉淀周度掉量监控与复盘 SOP，成为组内周会及业务复盘的统一数据底座。</li></ul>
+</div>
+</div>
+<div class="timeline-item">
+<div class="timeline-dot">02</div>
+<div class="timeline-card">
+<div class="time">2026.01 — 2026.04</div>
+<div class="company">阅文集团</div>
+<div class="role">内容运营实习生</div>
+<ul><li>主导 OPPO 预装 App 的 Push 推送策略，结合热点趋势与男女用户差异化内容偏好制定高点击、转化推送文案策略，单周覆盖用户近亿。</li><li>监控点击率、转化率、留存率等核心指标，通过推送品类、文案风格、时段、用户分层等维度下钻归因，推动 Push 点击率环比提升 12%、转化率环比提升 150%。</li><li>负责精选页 Banner、必读榜等核心资源位排期与配置，基于内容质量与用户画像逻辑匹配，提升优质内容曝光效率。</li><li>参与从 0 到 1 搭建 AI 内容标签体系与自动化推荐语生成规则，推动首页点击率环比提升 4%。</li></ul>
+</div>
+</div>
+</div>
+</section>
+<section class="pane" id="projects">
+<div class="section-head">
+<div class="section-index">03 / PROJECTS</div>
+<h2>项目展示</h2>
+<p>两个看板都保留原先的后台结构与交互方式。点击项目后，可以继续在看板内部切换 Tab 查看不同视角；作品集版本仅替换了敏感信息与真实业务数据。</p>
+</div>
+<div class="project-switch">
+<button class="switch-btn active" data-project="ad">广告经营分析看板</button>
+<button class="switch-btn" data-project="live">店播运营看板</button>
+</div>
+<div class="project-pane active" id="project-ad">
+<div class="project-card"><div class="project-intro-clean"><div>
+<div class="project-label">CASE STUDY 01</div>
+<div class="project-title">广告经营分析看板</div>
+<div class="project-desc">基于行业广告经营周度复盘场景重构的脱敏看板。围绕消耗、ROI、CPM 等核心指标，从整体大盘、营销目的、客户分层、行业、AM 与客户明细等维度下钻，支持异常识别、掉量诊断与经营复盘。</div>
+<div class="project-points">
+<div class="point"><b>业务场景</b><span>日常经营复盘需要在多个维度间切换，目标是把整体大盘与专项视角收拢到统一入口。</span></div>
+<div class="point"><b>我的工作</b><span>参与指标拆解、看板结构设计、页面重构与脱敏版作品集整理。</span></div>
+<div class="point"><b>页面结构</b><span>包含整体大盘、专项经营、行业视角、AM 视角和客户明细等模块。</span></div>
+<div class="point"><b>能力体现</b><span>经营指标理解、信息架构、数据可视化表达、业务沟通与项目沉淀。</span></div>
+</div>
+</div></div><div class="interactive-label">INTERACTIVE DEMO · 点击看板内部 Tab 可切换页面</div><iframe class="dashboard-frame" loading="lazy" referrerpolicy="no-referrer" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;style&gt;
+html,body{margin:0;padding:0;background:#f4f6fa;font-family:Inter,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif}
+
+:root{
+  --bg:#f5f7fb; --card:#ffffff; --line:#e6eaf1; --text:#1f2937; --muted:#667085;
+  --blue:#2959d9; --blue2:#6b91ff; --blueSoft:#edf2ff; --purpleSoft:#f5efff; --yellowSoft:#fff7db;
+  --green:#16a36d; --red:#d54a4a; --orange:#e7a53d; --deep:#0f172a;
+  --shadow:0 10px 28px rgba(16,24,40,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif}
+a{text-decoration:none;color:inherit}
+.container{width:min(1220px,calc(100% - 36px));margin:auto}
+.topnav{
+  position:sticky;top:0;z-index:30;background:rgba(245,247,251,.9);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(230,234,241,.9)
+}
+.topnav .inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font-weight:800;letter-spacing:.2px}
+.brand span{color:var(--blue)}
+.navlinks{display:flex;gap:22px;font-size:14px;color:#475467}
+.navlinks a:hover{color:var(--blue)}
+.cta{padding:10px 14px;border-radius:10px;background:#101828;color:#fff;font-weight:700;font-size:13px}
+.hero{padding:76px 0 50px}
+.eyebrow{font-size:12px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.14em}
+.hero h1{font-size:54px;line-height:1.05;letter-spacing:-1.8px;margin:12px 0 18px}
+.hero p{max-width:760px;font-size:18px;color:var(--muted);line-height:1.8;margin:0}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.badges span{padding:8px 10px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:12px;color:#475467}
+.section{padding:60px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:24px}
+.sec-head h2{margin:0;font-size:34px}
+.sec-head p{margin:0;max-width:560px;color:var(--muted);line-height:1.7}
+.cards{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 8px;font-size:22px}
+.card p{margin:0;color:var(--muted);line-height:1.7;font-size:14px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.tags span{font-size:11px;padding:7px 9px;border-radius:999px;background:#f4f6fa;color:#5a6477}
+.project-card{grid-column:1/-1}
+.case-wrap{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.case-top{padding:24px 26px;background:linear-gradient(135deg,#eef3ff 0%,#f9fbff 100%);border-bottom:1px solid var(--line)}
+.case-top h3{margin:0 0 8px;font-size:30px}
+.case-top p{margin:0;color:var(--muted);line-height:1.7}
+.case-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.case-mini{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+.case-mini b{font-size:13px}.case-mini p{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.6}
+.block{padding:24px 26px;border-top:1px solid var(--line)}
+.block h4{font-size:18px;margin:0 0 14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.problem{background:#fff;border:1px solid var(--line);padding:14px;border-radius:12px;font-size:13px;color:#475467}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow span{padding:10px 12px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:12px;font-weight:700}
+.flow i{font-style:normal;color:#98a2b3}
+.small{font-size:12px;color:#98a2b3}
+
+/* DASHBOARD */
+.demo-shell{margin-top:14px;background:#f4f6fa;border-radius:18px;border:1px solid var(--line);padding:16px}
+.browser-bar{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 14px}
+.browser-left{display:flex;align-items:center;gap:10px;color:#475467;font-size:13px}
+.burger{width:16px;height:12px;border-top:2px solid #98a2b3;border-bottom:2px solid #98a2b3;position:relative}
+.burger:after{content:&quot;&quot;;position:absolute;left:0;right:0;top:4px;border-top:2px solid #98a2b3}
+.browser-right{display:flex;align-items:center;gap:14px;color:#667085;font-size:12px}
+.browser-right .id{background:#9a1835;color:#fff;padding:4px 7px;border-radius:8px;font-weight:700}
+.db{
+  background:#f5f7fb;border-radius:16px;padding:0;overflow:hidden;border:1px solid #e9edf3
+}
+.db-header{margin:18px;border-radius:14px;background:linear-gradient(135deg,#2350d0 0%, #315edf 50%, #6a90ff 100%);padding:22px 24px;color:#fff}
+.db-title{font-size:22px;font-weight:800}
+.db-subline{font-size:13px;margin-top:8px;opacity:.88}
+.head-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.head-tags span{font-size:11px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+.main-tabs{display:flex;gap:14px;padding:0 18px 16px;overflow:auto}
+.main-tab{
+  flex:0 0 auto; min-width:145px; padding:16px 14px;border-radius:12px;background:#fff;border:1px solid var(--line);
+  color:#475467;font-size:14px;font-weight:700;cursor:pointer;text-align:center;line-height:1.35
+}
+.main-tab.active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 10px 18px rgba(41,89,217,.18)}
+.subtabs{display:flex;gap:18px;padding:4px 20px 14px;color:#667085;font-size:14px;align-items:center;flex-wrap:wrap}
+.subtab{
+  padding:8px 2px;border-bottom:2px solid transparent;cursor:pointer;display:flex;align-items:center;gap:6px
+}
+.subtab.active{color:var(--blue);font-weight:700;border-color:var(--blue)}
+.content{padding:0 18px 18px}
+.panel{display:none}
+.panel.active{display:block}
+.kpi-row{display:grid;grid-template-columns:1.1fr 1fr .95fr;gap:14px}
+.white-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 4px 12px rgba(16,24,40,.03)}
+.white-card h5{margin:0 0 12px;font-size:15px;color:#475467}
+.big-money{font-size:27px;font-weight:800;color:#206c54}
+.helper-row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.helper-list{font-size:13px;line-height:1.9;color:#475467}
+.progress-row{margin-top:14px}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:#667085}
+.progress{height:8px;border-radius:999px;background:#eef2f7;overflow:hidden;margin-top:7px}
+.progress &gt; span{display:block;height:100%;background:#1fa16b;border-radius:inherit}
+.progress.blue &gt; span{background:#2f6ae6}
+.note-box{margin-top:16px;background:#fff7df;border:1px solid #f4e1a3;border-radius:10px;padding:12px 14px;font-size:12px;color:#815c1b}
+.compare-stat{font-size:18px;font-weight:800}
+.compare-stack{display:grid;gap:18px;padding-top:6px}
+.compare-stack .item b{display:block;font-size:13px;color:#667085;margin-bottom:6px}
+.compare-stack .item span{font-size:14px;color:#475467}
+.chart-card{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.chart-title{font-size:14px;font-weight:700;color:#475467}
+.chart-sub{font-size:12px;color:#98a2b3;margin-top:3px}
+svg.chart{width:100%;height:220px;display:block;margin-top:8px}
+.legend{display:flex;gap:14px;font-size:12px;color:#667085;margin-top:8px}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.i-grey{background:#aab4c8}.i-green{background:#4fa989}.i-blue{background:#3f69e0}.i-red{background:#cc5560}.i-purple{background:#6d54f4}.i-black{background:#2b2f38}
+
+/* tables */
+.table-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0;overflow:hidden}
+.table-note{padding:14px 16px;border-bottom:1px solid var(--line);font-size:12px;color:#667085}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+th,td{padding:12px 12px;border-bottom:1px solid #eef2f6;text-align:left;white-space:nowrap}
+thead th{background:#fafbfe;color:#667085;font-weight:700}
+th.group-yellow{background:#fff9de}
+th.group-blue{background:#eef5ff}
+th.group-purple{background:#f5efff}
+tbody tr:hover{background:#fbfcff}
+tfoot td{background:#16254b;color:#fff;font-weight:700}
+.badge-status{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:700}
+.s-green{background:#ecfdf3;color:#16794e}.s-red{background:#fef0f0;color:#b53636}.s-orange{background:#fff7e5;color:#9b6b15}
+.s-grey{background:#f3f4f7;color:#596275}
+.k-tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700;color:#fff}
+.kt1{background:#b4802a}.kt2{background:#5278e2}.kt3{background:#54a57b}.kt4{background:#8d3dac}
+.pill-dot{display:inline-block;padding:4px 8px;border-radius:999px;background:#f4f6fa;font-size:11px;color:#596275}
+.small-charts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.small-chart{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+.small-chart .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.small-chart .head b{font-size:13px}
+.small-chart .head span{font-size:11px;font-weight:700}
+.small-chart svg{width:100%;height:160px;display:block}
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid var(--line);background:#fff}
+.fake-select,.fake-search,.fake-btn{
+  height:36px;display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:#fff;
+  padding:0 12px;font-size:12px;color:#475467
+}
+.fake-select{min-width:110px;justify-content:space-between;gap:10px}
+.fake-search{min-width:180px;flex:1}
+.fake-btn{background:#315edf;color:#fff;font-weight:700;border-color:#315edf}
+.cell-soft{color:#475467}
+.cell-weak{color:#98a2b3}
+.client-name b{display:block}.client-name span{font-size:11px;color:#98a2b3}
+.level{display:inline-block;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800;color:#fff}
+.lv1{background:#d5a23f}.lv2{background:#4cba70}.lv3{background:#e48a4d}.lv4{background:#cc5871}.lv5{background:#5b76d8}
+.action-btn{display:inline-block;padding:5px 9px;border-radius:8px;border:1px solid #e9c37a;background:#f4cf8a;color:#8e5c0d;font-size:11px;font-weight:700}
+.placeholder{background:#fff;border:1px dashed #ccd5e6;border-radius:14px;padding:40px 20px;text-align:center;color:#667085}
+.placeholder b{display:block;font-size:18px;color:#344054;margin-bottom:8px}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.about-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.about-card h3{margin:0 0 10px}
+.about-card p{margin:0;color:var(--muted);line-height:1.8}
+.timeline{display:grid;gap:12px}
+.timeline-item{padding-left:14px;border-left:2px solid #dfe6ff}
+.timeline-item b{font-size:13px}.timeline-item p{margin:4px 0 0;font-size:12px;color:var(--muted);line-height:1.7}
+.footer{padding:34px 0 48px;text-align:center;color:#98a2b3;font-size:12px}
+@media (max-width:980px){
+  .navlinks{display:none}.hero h1{font-size:40px}
+  .cards,.case-grid,.kpi-row,.grid2,.small-charts,.about-grid{grid-template-columns:1fr}
+}
+
+.live-kpi-grid .kpi{min-width:0}
+.live-kpi-grid .kpi strong{white-space:nowrap}
+@media(max-width:1100px){.live-kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+@media(max-width:760px){.live-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+
+body{padding:0}
+.demo-shell{margin:0;border:none;border-radius:0}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;demo-shell&quot;&gt;
+&lt;div class=&quot;browser-bar&quot;&gt;
+&lt;div class=&quot;browser-left&quot;&gt;&lt;span class=&quot;burger&quot;&gt;&lt;/span&gt;&lt;span&gt;← 返回 APP&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;browser-right&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;db&quot;&gt;
+&lt;div class=&quot;db-header&quot;&gt;
+&lt;div class=&quot;db-title&quot;&gt;AI 广告经营协同看板&lt;/div&gt;
+&lt;div class=&quot;db-subline&quot;&gt;基期 2026 年 5–6 月 · 目标增速 +x% · 分层：头部 +x% / 成长 +11.2% / 孵化 +3.2% · 数据源：Mock Dataset&lt;/div&gt;
+&lt;div class=&quot;head-tags&quot;&gt;&lt;span&gt;五组&lt;/span&gt;&lt;span&gt;专项经营&lt;/span&gt;&lt;span&gt;最近30天 GMV&lt;/span&gt;&lt;span&gt;v1.12 作品集版&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;main-tabs&quot; id=&quot;mainTabs&quot;&gt;
+&lt;div class=&quot;main-tab active&quot; data-main=&quot;overall&quot;&gt;📊 整体大盘&lt;/div&gt;
+&lt;div class=&quot;main-tab&quot; data-main=&quot;full&quot;&gt;🏷 专项经营专项·全量&lt;/div&gt;
+&lt;div class=&quot;main-tab&quot; data-main=&quot;focus&quot;&gt;⭐ 专项经营专项（重点识别周追踪）&lt;/div&gt;
+&lt;div class=&quot;main-tab&quot; data-main=&quot;new&quot;&gt;🆕 新开专项（周反馈）&lt;/div&gt;
+&lt;div class=&quot;main-tab&quot; data-main=&quot;nonloop&quot;&gt;🌱 行业拓展专项（周反馈）&lt;/div&gt;
+&lt;div class=&quot;main-tab&quot; data-main=&quot;brand&quot;&gt;🍃 品牌种草专项（周反馈）&lt;/div&gt;
+&lt;div class=&quot;main-tab&quot; data-main=&quot;lead&quot;&gt;🎯 线索转化专项（周反馈）&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;!-- OVERALL --&gt;
+&lt;div class=&quot;panel active&quot; data-panel=&quot;overall&quot;&gt;
+&lt;div class=&quot;subtabs&quot; id=&quot;overallSubtabs&quot;&gt;
+&lt;div class=&quot;subtab active&quot; data-sub=&quot;overall-progress&quot;&gt;🎯 业绩进展&lt;/div&gt;
+&lt;div class=&quot;subtab&quot; data-sub=&quot;overall-purpose&quot;&gt;📋 by 营销目的&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;panel active&quot; data-subpanel=&quot;overall-progress&quot;&gt;
+&lt;div class=&quot;kpi-row&quot;&gt;
+&lt;div class=&quot;white-card&quot;&gt;
+&lt;h5&gt;📈 大盘与目标锁定&lt;/h5&gt;
+&lt;div class=&quot;helper-row&quot;&gt;
+&lt;div&gt;
+&lt;div class=&quot;big-money&quot;&gt;¥12.84M&lt;/div&gt;
+&lt;div class=&quot;small&quot;&gt;当前实际（本双月至今）&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;helper-list&quot;&gt;
+&lt;div&gt;基期消耗 ¥17.86M&lt;/div&gt;
+&lt;div&gt;增量目标 ¥1.48M&lt;/div&gt;
+&lt;div&gt;直线外推 &lt;b&gt;+8.6%&lt;/b&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;progress-row&quot;&gt;
+&lt;div class=&quot;progress-label&quot;&gt;&lt;span&gt;完成进度&lt;/span&gt;&lt;b&gt;70.1%&lt;/b&gt;&lt;/div&gt;
+&lt;div class=&quot;progress&quot;&gt;&lt;span style=&quot;width:70.1%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;progress-row&quot;&gt;
+&lt;div class=&quot;progress-label&quot;&gt;&lt;span&gt;时间进度&lt;/span&gt;&lt;b&gt;67.7%&lt;/b&gt;&lt;/div&gt;
+&lt;div class=&quot;progress blue&quot;&gt;&lt;span style=&quot;width:67.7%&quot;&gt;&lt;/span&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div style=&quot;margin-top:14px;font-size:13px;color:#667085&quot;&gt;业绩进度 vs 时间进度 &lt;b style=&quot;color:#d06b4b&quot;&gt;+2.3pp&lt;/b&gt; ✅&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;white-card&quot;&gt;
+&lt;h5&gt;📅 节奏与日均&lt;/h5&gt;
+&lt;div class=&quot;big-money&quot; style=&quot;color:#3b708d&quot;&gt;¥511.0K&lt;/div&gt;
+&lt;div class=&quot;small&quot;&gt;日均实际（第 42 / 62 天）&lt;/div&gt;
+&lt;div class=&quot;helper-row&quot; style=&quot;margin-top:24px&quot;&gt;
+&lt;div class=&quot;helper-list&quot;&gt;
+&lt;div&gt;日均目标&lt;/div&gt;
+&lt;div&gt;日均缺口&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;helper-list&quot; style=&quot;text-align:right&quot;&gt;
+&lt;div&gt;¥494.0K&lt;/div&gt;
+&lt;div&gt;&lt;b&gt;+17.0K&lt;/b&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;note-box&quot;&gt;剩余 20 天日均需 &lt;b style=&quot;font-size:14px;color:#c24a1e&quot;&gt;¥458.3K&lt;/b&gt; 达成既定目标&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;white-card&quot;&gt;
+&lt;h5&gt;📊 双维对比&lt;/h5&gt;
+&lt;div class=&quot;compare-stack&quot;&gt;
+&lt;div class=&quot;item&quot;&gt;
+&lt;b&gt;🎯 同窗口同比&lt;/b&gt;
+&lt;div class=&quot;compare-stat&quot; style=&quot;color:#cf6b46&quot;&gt;+8.8%&lt;/div&gt;
+&lt;span&gt;vs 基期窗口 +5% · gap +3.8pp&lt;/span&gt;
+&lt;/div&gt;
+&lt;div class=&quot;item&quot;&gt;
+&lt;b&gt;📉 近 7 天环比&lt;/b&gt;
+&lt;div class=&quot;compare-stat&quot; style=&quot;color:#d0654e&quot;&gt;+2.4%&lt;/div&gt;
+&lt;span&gt;当期 8/5–8/11 ¥349.9K · vs 基期 ¥341.7K&lt;/span&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;chart-card&quot;&gt;
+&lt;div class=&quot;helper-row&quot;&gt;
+&lt;div&gt;
+&lt;div class=&quot;chart-title&quot;&gt;📈 业绩 by 天走势 · 双双月对比&lt;/div&gt;
+&lt;div class=&quot;chart-sub&quot;&gt;合计口径 · 模拟 Day 1–62 双月对齐 · 虚线=5–6月基期 / 实线=7–8月追踪&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;legend&quot;&gt;
+&lt;span&gt;&lt;i class=&quot;i-grey&quot;&gt;&lt;/i&gt;5–6 月基期&lt;/span&gt;
+&lt;span&gt;&lt;i class=&quot;i-green&quot;&gt;&lt;/i&gt;7–8 月追踪&lt;/span&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;svg class=&quot;chart&quot; preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 920 220&quot;&gt;
+&lt;line stroke=&quot;#edf1f6&quot; x1=&quot;44&quot; x2=&quot;900&quot; y1=&quot;28&quot; y2=&quot;28&quot;&gt;&lt;/line&gt;&lt;line stroke=&quot;#edf1f6&quot; x1=&quot;44&quot; x2=&quot;900&quot; y1=&quot;80&quot; y2=&quot;80&quot;&gt;&lt;/line&gt;&lt;line stroke=&quot;#edf1f6&quot; x1=&quot;44&quot; x2=&quot;900&quot; y1=&quot;132&quot; y2=&quot;132&quot;&gt;&lt;/line&gt;&lt;line stroke=&quot;#edf1f6&quot; x1=&quot;44&quot; x2=&quot;900&quot; y1=&quot;184&quot; y2=&quot;184&quot;&gt;&lt;/line&gt;
+&lt;text fill=&quot;#98a2b3&quot; font-size=&quot;10&quot; text-anchor=&quot;end&quot; x=&quot;38&quot; y=&quot;188&quot;&gt;¥30万&lt;/text&gt;
+&lt;text fill=&quot;#98a2b3&quot; font-size=&quot;10&quot; text-anchor=&quot;end&quot; x=&quot;38&quot; y=&quot;136&quot;&gt;¥40万&lt;/text&gt;
+&lt;text fill=&quot;#98a2b3&quot; font-size=&quot;10&quot; text-anchor=&quot;end&quot; x=&quot;38&quot; y=&quot;84&quot;&gt;¥50万&lt;/text&gt;
+&lt;text fill=&quot;#98a2b3&quot; font-size=&quot;10&quot; text-anchor=&quot;end&quot; x=&quot;38&quot; y=&quot;32&quot;&gt;¥60万&lt;/text&gt;
+&lt;polyline fill=&quot;none&quot; points=&quot;44,105 90,98 136,88 182,95 228,92 274,100 320,87 366,91 412,107 458,99 504,103 550,96 596,111 642,102 688,108 734,95 780,101 826,89 872,97&quot; stroke=&quot;#aab4c8&quot; stroke-dasharray=&quot;5 5&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;
+&lt;polyline fill=&quot;none&quot; points=&quot;44,80 90,83 136,65 182,87 228,85 274,84 320,71 366,90 412,82 458,79 504,91 550,89 596,76 642,94 688,87 734,98 780,91 826,80 872,93&quot; stroke=&quot;#4fa989&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;
+&lt;/svg&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;panel&quot; data-subpanel=&quot;overall-purpose&quot;&gt;
+&lt;div class=&quot;table-card&quot;&gt;
+&lt;div class=&quot;table-note&quot;&gt;📌 by 营销目的的追踪表 · 4 大类 + 总计 · 所有数据均为脱敏 Mock Data&lt;/div&gt;
+&lt;div class=&quot;table-wrap&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;营销目的&lt;/th&gt;
+&lt;th&gt;客户数&lt;/th&gt;
+&lt;th class=&quot;group-yellow&quot;&gt;基期消耗&lt;/th&gt;
+&lt;th class=&quot;group-yellow&quot;&gt;目标消耗&lt;/th&gt;
+&lt;th class=&quot;group-yellow&quot;&gt;增量目标&lt;/th&gt;
+&lt;th class=&quot;group-blue&quot;&gt;同期基期&lt;/th&gt;
+&lt;th class=&quot;group-blue&quot;&gt;本双月当期&lt;/th&gt;
+&lt;th class=&quot;group-blue&quot;&gt;同比&lt;/th&gt;
+&lt;th class=&quot;group-blue&quot;&gt;状态&lt;/th&gt;
+&lt;th class=&quot;group-purple&quot;&gt;近7天当期&lt;/th&gt;
+&lt;th class=&quot;group-purple&quot;&gt;7天基期&lt;/th&gt;
+&lt;th class=&quot;group-purple&quot;&gt;环比&lt;/th&gt;
+&lt;th class=&quot;group-purple&quot;&gt;状态&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;效果转化&lt;/td&gt;&lt;td&gt;612&lt;/td&gt;&lt;td&gt;¥2.01M&lt;/td&gt;&lt;td&gt;¥2.19M&lt;/td&gt;&lt;td&gt;+¥0.18M&lt;/td&gt;&lt;td&gt;¥1.36M&lt;/td&gt;&lt;td&gt;¥1.57M&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+15.3%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;● 达标&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥241.3K&lt;/td&gt;&lt;td&gt;¥246.0K&lt;/td&gt;&lt;td&gt;+1.9%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;品牌种草&lt;/td&gt;&lt;td&gt;160&lt;/td&gt;&lt;td&gt;¥0.39M&lt;/td&gt;&lt;td&gt;¥0.39M&lt;/td&gt;&lt;td&gt;+¥0.00M&lt;/td&gt;&lt;td&gt;¥0.26M&lt;/td&gt;&lt;td&gt;¥0.24M&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-7.0%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥38.8K&lt;/td&gt;&lt;td&gt;¥38.6K&lt;/td&gt;&lt;td&gt;-3.0%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;线索收集&lt;/td&gt;&lt;td&gt;88&lt;/td&gt;&lt;td&gt;¥0.21M&lt;/td&gt;&lt;td&gt;¥0.21M&lt;/td&gt;&lt;td&gt;+¥0.00M&lt;/td&gt;&lt;td&gt;¥0.14M&lt;/td&gt;&lt;td&gt;¥0.15M&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+1.2%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥24.1K&lt;/td&gt;&lt;td&gt;¥23.5K&lt;/td&gt;&lt;td&gt;-2.4%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;新客拓展&lt;/td&gt;&lt;td&gt;52&lt;/td&gt;&lt;td&gt;¥0.13M&lt;/td&gt;&lt;td&gt;¥0.09M&lt;/td&gt;&lt;td&gt;-¥0.04M&lt;/td&gt;&lt;td&gt;¥0.09M&lt;/td&gt;&lt;td&gt;¥0.06M&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-36.2%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥10.9K&lt;/td&gt;&lt;td&gt;¥14.3K&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+31.1%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;● 强增&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tfoot&gt;&lt;tr&gt;&lt;td&gt;总计&lt;/td&gt;&lt;td&gt;912&lt;/td&gt;&lt;td&gt;¥2.74M&lt;/td&gt;&lt;td&gt;¥2.88M&lt;/td&gt;&lt;td&gt;+¥0.14M&lt;/td&gt;&lt;td&gt;¥1.85M&lt;/td&gt;&lt;td&gt;¥2.01M&lt;/td&gt;&lt;td&gt;+8.6%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥316.1K&lt;/td&gt;&lt;td&gt;¥322.3K&lt;/td&gt;&lt;td&gt;+2.0%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-charts&quot;&gt;
+&lt;div class=&quot;small-chart&quot;&gt;
+&lt;div class=&quot;head&quot;&gt;&lt;b&gt;效果转化&lt;/b&gt;&lt;span style=&quot;color:#159a68&quot;&gt;+15.3%&lt;/span&gt;&lt;/div&gt;
+&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 420 160&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,55 45,58 80,40 115,62 150,60 185,48 220,55 255,51 290,57 325,53 360,66 405,61&quot; stroke=&quot;#3f69e0&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,82 45,79 80,76 115,72 150,70 185,75 220,67 255,72 290,69 325,68 360,62 405,71&quot; stroke=&quot;#d3daea&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;
+&lt;div class=&quot;head&quot;&gt;&lt;b&gt;品牌种草&lt;/b&gt;&lt;span style=&quot;color:#d54a4a&quot;&gt;-7.0%&lt;/span&gt;&lt;/div&gt;
+&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 420 160&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,63 45,57 80,61 115,59 150,64 185,66 220,62 255,64 290,60 325,69 360,66 405,72&quot; stroke=&quot;#3f6a59&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,73 45,70 80,68 115,66 150,64 185,62 220,60 255,58 290,56 325,82 360,61 405,70&quot; stroke=&quot;#d3daea&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;
+&lt;div class=&quot;head&quot;&gt;&lt;b&gt;线索收集&lt;/b&gt;&lt;span style=&quot;color:#c67c48&quot;&gt;+1.2%&lt;/span&gt;&lt;/div&gt;
+&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 420 160&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,55 45,66 80,61 115,69 150,64 185,66 220,63 255,68 290,64 325,67 360,62 405,65&quot; stroke=&quot;#b15356&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,58 45,56 80,59 115,60 150,62 185,61 220,59 255,60 290,58 325,59 360,62 405,61&quot; stroke=&quot;#d3daea&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;
+&lt;div class=&quot;head&quot;&gt;&lt;b&gt;新客拓展&lt;/b&gt;&lt;span style=&quot;color:#d54a4a&quot;&gt;-36.2%&lt;/span&gt;&lt;/div&gt;
+&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 420 160&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,118 45,120 80,112 115,95 150,116 185,101 220,117 255,108 290,89 325,96 360,78 405,72&quot; stroke=&quot;#6d54f4&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,78 45,83 80,79 115,72 150,76 185,82 220,81 255,88 290,96 325,112 360,120 405,108&quot; stroke=&quot;#d3daea&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- SPECIAL / FULL --&gt;
+&lt;div class=&quot;panel&quot; data-panel=&quot;full&quot;&gt;
+&lt;div class=&quot;subtabs&quot; id=&quot;specialSubtabs&quot;&gt;
+&lt;div class=&quot;subtab active&quot; data-sub=&quot;summary&quot;&gt;📊 数据总览&lt;/div&gt;
+&lt;div class=&quot;subtab&quot; data-sub=&quot;industry&quot;&gt;🏷 行业视角&lt;/div&gt;
+&lt;div class=&quot;subtab&quot; data-sub=&quot;am&quot;&gt;👥 AM 视角&lt;/div&gt;
+&lt;div class=&quot;subtab&quot; data-sub=&quot;clients&quot;&gt;📄 客户明细&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;panel active&quot; data-subpanel=&quot;summary&quot;&gt;
+&lt;div class=&quot;table-card&quot;&gt;
+&lt;div class=&quot;table-note&quot;&gt;🚀 三档业绩追踪 · 基期与目标锁定 · 所有口径均为脱敏 Mock Data&lt;/div&gt;
+&lt;div class=&quot;table-wrap&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;池&lt;/th&gt;
+&lt;th&gt;客户数&lt;/th&gt;
+&lt;th class=&quot;group-yellow&quot;&gt;5–6月消耗&lt;/th&gt;
+&lt;th class=&quot;group-yellow&quot;&gt;7–8月目标&lt;/th&gt;
+&lt;th class=&quot;group-blue&quot;&gt;同期基期&lt;/th&gt;
+&lt;th class=&quot;group-blue&quot;&gt;当期&lt;/th&gt;
+&lt;th class=&quot;group-blue&quot;&gt;同比&lt;/th&gt;
+&lt;th class=&quot;group-blue&quot;&gt;状态&lt;/th&gt;
+&lt;th class=&quot;group-purple&quot;&gt;近7天当期&lt;/th&gt;
+&lt;th class=&quot;group-purple&quot;&gt;7天基期&lt;/th&gt;
+&lt;th class=&quot;group-purple&quot;&gt;环比&lt;/th&gt;
+&lt;th class=&quot;group-purple&quot;&gt;状态&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;k-tag kt2&quot;&gt;全量&lt;/span&gt; 100% 业绩盘·全组&lt;/td&gt;&lt;td&gt;691&lt;/td&gt;&lt;td&gt;¥2.02M&lt;/td&gt;&lt;td&gt;&lt;b&gt;¥2.20M&lt;/b&gt;&lt;div class=&quot;small&quot;&gt;+¥0.18M&lt;/div&gt;&lt;/td&gt;&lt;td&gt;¥1.36M&lt;/td&gt;&lt;td&gt;&lt;b&gt;¥1.40M&lt;/b&gt;&lt;/td&gt;&lt;td&gt;+3.2%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增 +3.2%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥199.0K&lt;/td&gt;&lt;td&gt;¥205.0K&lt;/td&gt;&lt;td&gt;-2.9%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -2.9%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;k-tag kt1&quot;&gt;头部&lt;/span&gt; 70% 业绩盘·头部客群&lt;/td&gt;&lt;td&gt;47&lt;/td&gt;&lt;td&gt;¥1.41M&lt;/td&gt;&lt;td&gt;&lt;b&gt;¥1.57M&lt;/b&gt;&lt;div class=&quot;small&quot;&gt;+¥0.16M&lt;/div&gt;&lt;/td&gt;&lt;td&gt;¥0.96M&lt;/td&gt;&lt;td&gt;&lt;b&gt;¥0.92M&lt;/b&gt;&lt;/td&gt;&lt;td&gt;-4.1%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -4.0%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥126.1K&lt;/td&gt;&lt;td&gt;¥128.1K&lt;/td&gt;&lt;td&gt;-1.6%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -1.6%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;k-tag kt2&quot;&gt;成长&lt;/span&gt; 30% 业绩盘·成长尾层&lt;/td&gt;&lt;td&gt;621&lt;/td&gt;&lt;td&gt;¥0.61M&lt;/td&gt;&lt;td&gt;&lt;b&gt;¥0.62M&lt;/b&gt;&lt;div class=&quot;small&quot;&gt;+¥0.02M&lt;/div&gt;&lt;/td&gt;&lt;td&gt;¥0.40M&lt;/td&gt;&lt;td&gt;&lt;b&gt;¥0.49M&lt;/b&gt;&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+20.5%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;● 达标 +20.5%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥73.0K&lt;/td&gt;&lt;td&gt;¥76.9K&lt;/td&gt;&lt;td&gt;-5.0%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -5.0%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-charts&quot; style=&quot;grid-template-columns:1fr 1fr 1fr&quot;&gt;
+&lt;div class=&quot;small-chart&quot;&gt;
+&lt;div class=&quot;head&quot;&gt;&lt;b&gt;全组 100%&lt;/b&gt;&lt;span class=&quot;cell-weak&quot;&gt;3,928 家&lt;/span&gt;&lt;/div&gt;
+&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 340 160&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,63 35,67 60,45 85,58 110,49 135,52 160,61 185,59 210,56 235,58 260,54 285,50 310,46 330,44&quot; stroke=&quot;#315edf&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,78 35,71 60,69 85,75 110,70 135,72 160,76 185,71 210,73 235,69 260,67 285,71 310,64 330,68&quot; stroke=&quot;#b8c4dc&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;
+&lt;div class=&quot;head&quot;&gt;&lt;b&gt;头部 70%&lt;/b&gt;&lt;span class=&quot;cell-weak&quot;&gt;466 家&lt;/span&gt;&lt;/div&gt;
+&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 340 160&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,62 35,66 60,38 85,70 110,68 135,59 160,57 185,64 210,58 235,61 260,56 285,52 310,43 330,49&quot; stroke=&quot;#ba663d&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,85 35,83 60,79 85,77 110,74 135,72 160,73 185,71 210,69 235,67 260,65 285,61 310,63 330,58&quot; stroke=&quot;#dbc8c0&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;
+&lt;div class=&quot;head&quot;&gt;&lt;b&gt;成长 30%&lt;/b&gt;&lt;span class=&quot;cell-weak&quot;&gt;3,462 家&lt;/span&gt;&lt;/div&gt;
+&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 340 160&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,70 35,74 60,50 85,56 110,61 135,65 160,67 185,62 210,58 235,60 260,49 285,53 310,39 330,32&quot; stroke=&quot;#316f96&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,82 35,77 60,75 85,73 110,71 135,76 160,70 185,72 210,69 235,66 260,64 285,68 310,63 330,70&quot; stroke=&quot;#b8c4dc&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;panel&quot; data-subpanel=&quot;industry&quot;&gt;
+&lt;div class=&quot;table-card&quot;&gt;
+&lt;div class=&quot;table-note&quot;&gt;🏷 行业视角 · 4 类主行业 + 合计&lt;/div&gt;
+&lt;div class=&quot;table-wrap&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;行业&lt;/th&gt;&lt;th&gt;AM&lt;/th&gt;&lt;th&gt;客户数&lt;/th&gt;
+&lt;th class=&quot;group-yellow&quot;&gt;5–6月消耗&lt;/th&gt;&lt;th class=&quot;group-yellow&quot;&gt;7–8月目标&lt;/th&gt;
+&lt;th class=&quot;group-blue&quot;&gt;同期基期&lt;/th&gt;&lt;th class=&quot;group-blue&quot;&gt;当期&lt;/th&gt;&lt;th class=&quot;group-blue&quot;&gt;同比&lt;/th&gt;&lt;th class=&quot;group-blue&quot;&gt;状态&lt;/th&gt;
+&lt;th class=&quot;group-purple&quot;&gt;近7天当期&lt;/th&gt;&lt;th class=&quot;group-purple&quot;&gt;7天基期&lt;/th&gt;&lt;th class=&quot;group-purple&quot;&gt;环比&lt;/th&gt;&lt;th class=&quot;group-purple&quot;&gt;状态&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;k-tag kt4&quot;&gt;服饰内睡&lt;/span&gt;&lt;/td&gt;&lt;td&gt;西娅 · 九令&lt;/td&gt;&lt;td&gt;279&lt;/td&gt;&lt;td&gt;¥0.78M&lt;/td&gt;&lt;td&gt;¥0.85M&lt;/td&gt;&lt;td&gt;¥0.54M&lt;/td&gt;&lt;td&gt;¥0.52M&lt;/td&gt;&lt;td&gt;-3.6%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -3.6%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥74.0K&lt;/td&gt;&lt;td&gt;¥78.5K&lt;/td&gt;&lt;td&gt;-5.7%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -5.7%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;k-tag kt2&quot;&gt;鞋靴箱包&lt;/span&gt;&lt;/td&gt;&lt;td&gt;红石 · 小满&lt;/td&gt;&lt;td&gt;175&lt;/td&gt;&lt;td&gt;¥0.62M&lt;/td&gt;&lt;td&gt;¥0.67M&lt;/td&gt;&lt;td&gt;¥0.42M&lt;/td&gt;&lt;td&gt;¥0.44M&lt;/td&gt;&lt;td&gt;+4.6%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增 +4.6%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥66.1K&lt;/td&gt;&lt;td&gt;¥63.9K&lt;/td&gt;&lt;td&gt;+3.5%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增 +3.5%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;k-tag kt3&quot;&gt;运动户外&lt;/span&gt;&lt;/td&gt;&lt;td&gt;露比&lt;/td&gt;&lt;td&gt;134&lt;/td&gt;&lt;td&gt;¥0.36M&lt;/td&gt;&lt;td&gt;¥0.39M&lt;/td&gt;&lt;td&gt;¥0.23M&lt;/td&gt;&lt;td&gt;¥0.28M&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+19.7%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;● 达标 +19.7%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥37.7K&lt;/td&gt;&lt;td&gt;¥38.3K&lt;/td&gt;&lt;td&gt;-1.4%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -1.4%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;k-tag kt1&quot;&gt;男装&lt;/span&gt;&lt;/td&gt;&lt;td&gt;阿诺&lt;/td&gt;&lt;td&gt;51&lt;/td&gt;&lt;td&gt;¥0.18M&lt;/td&gt;&lt;td&gt;¥0.19M&lt;/td&gt;&lt;td&gt;¥0.11M&lt;/td&gt;&lt;td&gt;¥0.11M&lt;/td&gt;&lt;td&gt;+2.4%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增 +2.4%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥13.7K&lt;/td&gt;&lt;td&gt;¥16.1K&lt;/td&gt;&lt;td&gt;-14.8%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -14.8%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tfoot&gt;&lt;tr&gt;&lt;td&gt;合计&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;691&lt;/td&gt;&lt;td&gt;¥2.02M&lt;/td&gt;&lt;td&gt;¥2.20M&lt;/td&gt;&lt;td&gt;¥1.36M&lt;/td&gt;&lt;td&gt;¥1.40M&lt;/td&gt;&lt;td&gt;+3.2%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增 +3.2%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥199.0K&lt;/td&gt;&lt;td&gt;¥205.0K&lt;/td&gt;&lt;td&gt;-2.9%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -2.9%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-charts&quot; style=&quot;grid-template-columns:1fr 1fr 1fr 1fr&quot;&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;服饰内睡&lt;/b&gt;&lt;span style=&quot;color:#cc4d9a&quot;&gt;-3.6%&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 250 150&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,65 30,70 50,52 70,67 90,63 110,65 130,62 150,58 170,61 190,59 210,56 230,48&quot; stroke=&quot;#cf4eab&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,84 30,79 50,80 70,76 90,79 110,77 130,76 150,75 170,74 190,72 210,71 230,73&quot; stroke=&quot;#d9dff0&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;鞋靴箱包&lt;/b&gt;&lt;span style=&quot;color:#c28c1f&quot;&gt;+4.6%&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 250 150&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,74 30,71 50,48 70,62 90,58 110,57 130,59 150,61 170,58 190,55 210,50 230,47&quot; stroke=&quot;#5d63f0&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,80 30,77 50,78 70,79 90,75 110,76 130,74 150,73 170,72 190,70 210,69 230,68&quot; stroke=&quot;#d9dff0&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;运动户外&lt;/b&gt;&lt;span style=&quot;color:#159a68&quot;&gt;+19.7%&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 250 150&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,83 30,79 50,54 70,65 90,69 110,63 130,67 150,58 170,61 190,63 210,46 230,34&quot; stroke=&quot;#3a8eb8&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,88 30,82 50,80 70,79 90,76 110,75 130,73 150,72 170,71 190,70 210,68 230,67&quot; stroke=&quot;#d9dff0&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;男装&lt;/b&gt;&lt;span style=&quot;color:#c28c1f&quot;&gt;+2.4%&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 250 150&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,76 30,73 50,58 70,75 90,71 110,77 130,72 150,67 170,75 190,68 210,61 230,66&quot; stroke=&quot;#22262f&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,86 30,83 50,81 70,82 90,79 110,80 130,79 150,76 170,74 190,70 210,69 230,71&quot; stroke=&quot;#d9dff0&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;panel&quot; data-subpanel=&quot;am&quot;&gt;
+&lt;div class=&quot;table-card&quot;&gt;
+&lt;div class=&quot;table-note&quot;&gt;👥 AM 视角 · 按 AM 拆分 · 当前示例展示 8 位 AM&lt;/div&gt;
+&lt;div class=&quot;table-wrap&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;AM&lt;/th&gt;&lt;th&gt;客户数&lt;/th&gt;&lt;th class=&quot;group-yellow&quot;&gt;5–6月消耗&lt;/th&gt;&lt;th class=&quot;group-yellow&quot;&gt;7–8月目标&lt;/th&gt;
+&lt;th class=&quot;group-blue&quot;&gt;同期基期&lt;/th&gt;&lt;th class=&quot;group-blue&quot;&gt;当期&lt;/th&gt;&lt;th class=&quot;group-blue&quot;&gt;同比&lt;/th&gt;&lt;th class=&quot;group-blue&quot;&gt;状态&lt;/th&gt;
+&lt;th class=&quot;group-purple&quot;&gt;近7天当期&lt;/th&gt;&lt;th class=&quot;group-purple&quot;&gt;7天基期&lt;/th&gt;&lt;th class=&quot;group-purple&quot;&gt;环比&lt;/th&gt;&lt;th class=&quot;group-purple&quot;&gt;状态&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;九令（高心怡）&lt;/td&gt;&lt;td&gt;152&lt;/td&gt;&lt;td&gt;¥391.9K&lt;/td&gt;&lt;td&gt;¥425.7K&lt;/td&gt;&lt;td&gt;¥274.2K&lt;/td&gt;&lt;td&gt;¥251.4K&lt;/td&gt;&lt;td&gt;-8.3%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 严重落后 -8.3%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥34.6K&lt;/td&gt;&lt;td&gt;¥38.5K&lt;/td&gt;&lt;td&gt;-10.1%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -10.1%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;茜茜（林晓艺）&lt;/td&gt;&lt;td&gt;127&lt;/td&gt;&lt;td&gt;¥387.9K&lt;/td&gt;&lt;td&gt;¥422.6K&lt;/td&gt;&lt;td&gt;¥266.2K&lt;/td&gt;&lt;td&gt;¥269.6K&lt;/td&gt;&lt;td&gt;+1.3%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 落后 +1.3%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥39.4K&lt;/td&gt;&lt;td&gt;¥40.0K&lt;/td&gt;&lt;td&gt;-1.5%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -1.5%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;露比（曹宇琪）&lt;/td&gt;&lt;td&gt;134&lt;/td&gt;&lt;td&gt;¥356.2K&lt;/td&gt;&lt;td&gt;¥386.5K&lt;/td&gt;&lt;td&gt;¥230.6K&lt;/td&gt;&lt;td&gt;¥275.9K&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+19.7%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;● 强超 +19.7%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥37.7K&lt;/td&gt;&lt;td&gt;¥38.3K&lt;/td&gt;&lt;td&gt;-1.4%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -1.4%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;红石（黄亚娜）&lt;/td&gt;&lt;td&gt;91&lt;/td&gt;&lt;td&gt;¥346.9K&lt;/td&gt;&lt;td&gt;¥378.1K&lt;/td&gt;&lt;td&gt;¥232.8K&lt;/td&gt;&lt;td&gt;¥262.1K&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+12.6%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;● 达标 +12.6%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥38.0K&lt;/td&gt;&lt;td&gt;¥37.5K&lt;/td&gt;&lt;td&gt;+1.3%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增 +1.3%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;小满（姚鹏游）&lt;/td&gt;&lt;td&gt;83&lt;/td&gt;&lt;td&gt;¥270.7K&lt;/td&gt;&lt;td&gt;¥294.9K&lt;/td&gt;&lt;td&gt;¥186.2K&lt;/td&gt;&lt;td&gt;¥176.4K&lt;/td&gt;&lt;td&gt;-5.3%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 严重落后 -5.3%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥28.2K&lt;/td&gt;&lt;td&gt;¥26.5K&lt;/td&gt;&lt;td&gt;+6.6%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增 +6.6%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;阿诺（陈诺）&lt;/td&gt;&lt;td&gt;51&lt;/td&gt;&lt;td&gt;¥175.0K&lt;/td&gt;&lt;td&gt;¥190.9K&lt;/td&gt;&lt;td&gt;¥112.0K&lt;/td&gt;&lt;td&gt;¥114.7K&lt;/td&gt;&lt;td&gt;+2.5%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 落后 +2.4%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥13.7K&lt;/td&gt;&lt;td&gt;¥16.1K&lt;/td&gt;&lt;td&gt;-14.8%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -14.8%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;雪野（周嘉钰）&lt;/td&gt;&lt;td&gt;13&lt;/td&gt;&lt;td&gt;¥49.9K&lt;/td&gt;&lt;td&gt;¥54.4K&lt;/td&gt;&lt;td&gt;¥32.1K&lt;/td&gt;&lt;td&gt;¥31.9K&lt;/td&gt;&lt;td&gt;-0.6%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 落后 -0.6%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥4.5K&lt;/td&gt;&lt;td&gt;¥4.7K&lt;/td&gt;&lt;td&gt;-3.8%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -3.8%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;班尼（朱映婷）&lt;/td&gt;&lt;td&gt;9&lt;/td&gt;&lt;td&gt;¥21.1K&lt;/td&gt;&lt;td&gt;¥22.8K&lt;/td&gt;&lt;td&gt;¥15.1K&lt;/td&gt;&lt;td&gt;¥13.2K&lt;/td&gt;&lt;td&gt;-12.9%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 严重落后 -12.9%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥1.7K&lt;/td&gt;&lt;td&gt;¥2.0K&lt;/td&gt;&lt;td&gt;-13.7%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -13.7%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tfoot&gt;&lt;tr&gt;&lt;td&gt;合计&lt;/td&gt;&lt;td&gt;691&lt;/td&gt;&lt;td&gt;¥2.02M&lt;/td&gt;&lt;td&gt;¥2.20M&lt;/td&gt;&lt;td&gt;¥1.36M&lt;/td&gt;&lt;td&gt;¥1.40M&lt;/td&gt;&lt;td&gt;+3.2%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增 +3.2%&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥199.0K&lt;/td&gt;&lt;td&gt;¥205.0K&lt;/td&gt;&lt;td&gt;-2.9%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑 -2.9%&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-charts&quot; style=&quot;grid-template-columns:1fr 1fr 1fr&quot;&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;九令（高心怡）&lt;/b&gt;&lt;span style=&quot;color:#cf6b83&quot;&gt;-8.3%&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 340 160&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,55 35,62 60,51 85,66 110,58 135,62 160,59 185,63 210,60 235,54 260,64 285,48 310,53 330,50&quot; stroke=&quot;#8d5b3e&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,80 35,77 60,74 85,76 110,74 135,72 160,75 185,70 210,71 235,68 260,69 285,67 310,65 330,63&quot; stroke=&quot;#d8dded&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;茜茜（林晓艺）&lt;/b&gt;&lt;span style=&quot;color:#c28c1f&quot;&gt;+1.3%&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 340 160&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,68 35,71 60,45 85,83 110,75 135,70 160,69 185,74 210,71 235,66 260,64 285,62 310,59 330,56&quot; stroke=&quot;#b94c5d&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,82 35,79 60,77 85,76 110,75 135,73 160,74 185,73 210,71 235,70 260,68 285,67 310,66 330,65&quot; stroke=&quot;#d8dded&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;露比（曹宇琪）&lt;/b&gt;&lt;span style=&quot;color:#159a68&quot;&gt;+19.7%&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 340 160&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,78 35,74 60,49 85,66 110,65 135,60 160,58 185,59 210,57 235,53 260,50 285,47 310,39 330,36&quot; stroke=&quot;#b43d64&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,88 35,84 60,83 85,80 110,79 135,77 160,76 185,74 210,72 235,70 260,69 285,67 310,65 330,64&quot; stroke=&quot;#d8dded&quot; stroke-dasharray=&quot;4 4&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;panel&quot; data-subpanel=&quot;clients&quot;&gt;
+&lt;div class=&quot;table-card&quot;&gt;
+&lt;div class=&quot;filter-bar&quot;&gt;
+&lt;div class=&quot;fake-select&quot;&gt;全部 AM &lt;span&gt;▾&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;fake-select&quot;&gt;全部档位 &lt;span&gt;▾&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;fake-select&quot;&gt;全部增速状态 &lt;span&gt;▾&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;fake-select&quot;&gt;全部首消日期 &lt;span&gt;▾&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;fake-select&quot;&gt;全部 B 等级 &lt;span&gt;▾&lt;/span&gt;&lt;/div&gt;
+&lt;div class=&quot;fake-search&quot;&gt;搜索 广告主 / 店铺&lt;/div&gt;
+&lt;div class=&quot;fake-btn&quot;&gt;导出 CSV&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;table-wrap&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;档位&lt;/th&gt;&lt;th&gt;广告主 / 店铺&lt;/th&gt;&lt;th&gt;AM&lt;/th&gt;&lt;th&gt;首消日期&lt;/th&gt;&lt;th&gt;B等级&lt;/th&gt;&lt;th&gt;近30天GMV&lt;/th&gt;&lt;th&gt;5–6月消耗&lt;/th&gt;&lt;th&gt;5–6月 ROI&lt;/th&gt;&lt;th&gt;7/1–8/11 消耗&lt;/th&gt;&lt;th&gt;7/1–8/11 ROI&lt;/th&gt;&lt;th&gt;同比增速&lt;/th&gt;&lt;th&gt;状态&lt;/th&gt;&lt;th&gt;跟踪&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;level lv1&quot;&gt;P1&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;client-name&quot;&gt;&lt;b&gt;星屿有礼&lt;/b&gt;&lt;span&gt;Brand · Lifestyle Boutique&lt;/span&gt;&lt;/td&gt;&lt;td&gt;茜茜（林晓艺）&lt;/td&gt;&lt;td&gt;2024-07-23&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;level lv2&quot;&gt;B4&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥17.6K&lt;/td&gt;&lt;td&gt;¥24.2K&lt;/td&gt;&lt;td&gt;2.30&lt;/td&gt;&lt;td&gt;¥15.6K&lt;/td&gt;&lt;td&gt;2.35&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-11.0%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;action-btn&quot;&gt;已跟踪&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;level lv1&quot;&gt;P1&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;client-name&quot;&gt;&lt;b&gt;QIKII 轻集&lt;/b&gt;&lt;span&gt;Skincare &amp;amp; Travel&lt;/span&gt;&lt;/td&gt;&lt;td&gt;露比（曹宇琪）&lt;/td&gt;&lt;td&gt;2026-04-22&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;level lv2&quot;&gt;B4&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥27.2K&lt;/td&gt;&lt;td&gt;¥19.1K&lt;/td&gt;&lt;td&gt;2.57&lt;/td&gt;&lt;td&gt;¥9.5K&lt;/td&gt;&lt;td&gt;2.76&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-23.0%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;action-btn&quot;&gt;已跟踪&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;level lv1&quot;&gt;P1&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;client-name&quot;&gt;&lt;b&gt;MOOP TREND&lt;/b&gt;&lt;span&gt;Fashion Label&lt;/span&gt;&lt;/td&gt;&lt;td&gt;阿诺（陈诺）&lt;/td&gt;&lt;td&gt;2023-12-07&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;level lv2&quot;&gt;B4&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥18.1K&lt;/td&gt;&lt;td&gt;¥16.6K&lt;/td&gt;&lt;td&gt;2.77&lt;/td&gt;&lt;td&gt;¥3.5K&lt;/td&gt;&lt;td&gt;2.37&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-71.1%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;action-btn&quot;&gt;已跟踪&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;level lv1&quot;&gt;P1&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;client-name&quot;&gt;&lt;b&gt;爱笑的美日常&lt;/b&gt;&lt;span&gt;Beauty Store&lt;/span&gt;&lt;/td&gt;&lt;td&gt;九令（高心怡）&lt;/td&gt;&lt;td&gt;2026-05-13&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;level lv2&quot;&gt;B4&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥26.8K&lt;/td&gt;&lt;td&gt;¥15.2K&lt;/td&gt;&lt;td&gt;1.58&lt;/td&gt;&lt;td&gt;¥13.8K&lt;/td&gt;&lt;td&gt;1.42&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+130.0%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;● 强增&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;action-btn&quot;&gt;已跟踪&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;level lv1&quot;&gt;P1&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;client-name&quot;&gt;&lt;b&gt;北柠杂记&lt;/b&gt;&lt;span&gt;Home &amp;amp; Living&lt;/span&gt;&lt;/td&gt;&lt;td&gt;茜茜（林晓艺）&lt;/td&gt;&lt;td&gt;2026-03-27&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;level lv2&quot;&gt;B4&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥39.7K&lt;/td&gt;&lt;td&gt;¥15.1K&lt;/td&gt;&lt;td&gt;2.72&lt;/td&gt;&lt;td&gt;¥13.3K&lt;/td&gt;&lt;td&gt;2.42&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+56.3%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;● 强增&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;action-btn&quot;&gt;已跟踪&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;level lv1&quot;&gt;P1&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;client-name&quot;&gt;&lt;b&gt;雪雪橘子户外&lt;/b&gt;&lt;span&gt;Outdoor Retail&lt;/span&gt;&lt;/td&gt;&lt;td&gt;露比（曹宇琪）&lt;/td&gt;&lt;td&gt;2025-08-24&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;level lv3&quot;&gt;B5&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥64.8K&lt;/td&gt;&lt;td&gt;¥15.1K&lt;/td&gt;&lt;td&gt;3.00&lt;/td&gt;&lt;td&gt;¥8.0K&lt;/td&gt;&lt;td&gt;2.87&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-24.9%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;action-btn&quot;&gt;已跟踪&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;level lv1&quot;&gt;P1&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;client-name&quot;&gt;&lt;b&gt;Liay 同学&lt;/b&gt;&lt;span&gt;Apparel &amp;amp; Accessories&lt;/span&gt;&lt;/td&gt;&lt;td&gt;红石（黄亚娜）&lt;/td&gt;&lt;td&gt;2025-11-28&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;level lv2&quot;&gt;B4&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥17.2K&lt;/td&gt;&lt;td&gt;¥14.4K&lt;/td&gt;&lt;td&gt;2.07&lt;/td&gt;&lt;td&gt;¥12.8K&lt;/td&gt;&lt;td&gt;2.02&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+26.9%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;● 达标&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;action-btn&quot;&gt;已跟踪&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;level lv1&quot;&gt;P1&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;client-name&quot;&gt;&lt;b&gt;贝楠限定&lt;/b&gt;&lt;span&gt;Curated Lifestyle&lt;/span&gt;&lt;/td&gt;&lt;td&gt;红石（黄亚娜）&lt;/td&gt;&lt;td&gt;2025-10-24&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;level lv2&quot;&gt;B4&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥15.0K&lt;/td&gt;&lt;td&gt;¥13.7K&lt;/td&gt;&lt;td&gt;2.30&lt;/td&gt;&lt;td&gt;¥14.3K&lt;/td&gt;&lt;td&gt;1.92&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+17.0%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;● 达标&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;action-btn&quot;&gt;已跟踪&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;level lv1&quot;&gt;P1&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;client-name&quot;&gt;&lt;b&gt;大英杂社&lt;/b&gt;&lt;span&gt;Design Household&lt;/span&gt;&lt;/td&gt;&lt;td&gt;小满（姚鹏游）&lt;/td&gt;&lt;td&gt;2026-03-31&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;level lv2&quot;&gt;B4&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥41.3K&lt;/td&gt;&lt;td&gt;¥13.4K&lt;/td&gt;&lt;td&gt;5.59&lt;/td&gt;&lt;td&gt;¥4.9K&lt;/td&gt;&lt;td&gt;5.20&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-55.0%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;● 下滑&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;action-btn&quot;&gt;跟踪&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class=&quot;level lv1&quot;&gt;P1&lt;/span&gt;&lt;/td&gt;&lt;td class=&quot;client-name&quot;&gt;&lt;b&gt;百跃路&lt;/b&gt;&lt;span&gt;Beauty Lifestyle&lt;/span&gt;&lt;/td&gt;&lt;td&gt;露比（曹宇琪）&lt;/td&gt;&lt;td&gt;2022-03-23&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;level lv2&quot;&gt;B4&lt;/span&gt;&lt;/td&gt;&lt;td&gt;¥18.6K&lt;/td&gt;&lt;td&gt;¥11.8K&lt;/td&gt;&lt;td&gt;1.84&lt;/td&gt;&lt;td&gt;¥9.6K&lt;/td&gt;&lt;td&gt;1.62&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+15.3%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;● 达标&lt;/span&gt;&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;action-btn&quot;&gt;已跟踪&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tfoot&gt;&lt;tr&gt;&lt;td&gt;合计&lt;/td&gt;&lt;td&gt;共 691 客户&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;¥154.8K&lt;/td&gt;&lt;td&gt;¥201.8K&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;¥140.5K&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;td&gt;+3.22%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;● 微增&lt;/span&gt;&lt;/td&gt;&lt;td&gt;188 家已跟踪&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- OTHER MAIN TABS reuse structure label --&gt;
+&lt;div class=&quot;panel&quot; data-panel=&quot;focus&quot;&gt;&lt;div class=&quot;placeholder&quot;&gt;&lt;b&gt;重点识别周追踪&lt;/b&gt;当前版本已保留顶层切换结构。后续如果你要，我可以继续把这一页也按照同样风格补成完整表格和图表。&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;panel&quot; data-panel=&quot;new&quot;&gt;&lt;div class=&quot;placeholder&quot;&gt;&lt;b&gt;新开专项（周反馈）&lt;/b&gt;当前为作品集占位页，可继续扩展为新开客户业绩、首消趋势与重点客户追踪。&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;panel&quot; data-panel=&quot;nonloop&quot;&gt;&lt;div class=&quot;placeholder&quot;&gt;&lt;b&gt;行业拓展专项（周反馈）&lt;/b&gt;当前为作品集占位页，可扩展为非闭环 / 行业拓展专项分析。&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;panel&quot; data-panel=&quot;brand&quot;&gt;&lt;div class=&quot;placeholder&quot;&gt;&lt;b&gt;品牌种草专项（周反馈）&lt;/b&gt;当前为作品集占位页，可扩展为内容种草 / 品牌投放专项。&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;panel&quot; data-panel=&quot;lead&quot;&gt;&lt;div class=&quot;placeholder&quot;&gt;&lt;b&gt;线索转化专项（周反馈）&lt;/b&gt;当前为作品集占位页，可扩展为线索收集、转化率与线索质量分析。&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+(function(){
+  const mainTabs = document.querySelectorAll('#mainTabs .main-tab');
+  const panels = document.querySelectorAll('.content &gt; .panel');
+
+  function activateMain(key){
+    mainTabs.forEach(t=&gt;t.classList.toggle('active', t.dataset.main===key));
+    panels.forEach(p=&gt;p.classList.toggle('active', p.dataset.panel===key));
+  }
+  mainTabs.forEach(tab=&gt;tab.addEventListener('click', ()=&gt;activateMain(tab.dataset.main)));
+
+  function bindSubtab(containerSelector){
+    const container = document.querySelector(containerSelector);
+    if(!container) return;
+    const subtabs = container.querySelectorAll('.subtab');
+    const targetPanel = container.parentElement;
+    subtabs.forEach(st=&gt;{
+      st.addEventListener('click', ()=&gt;{
+        subtabs.forEach(x=&gt;x.classList.remove('active'));
+        st.classList.add('active');
+        const key = st.dataset.sub;
+        targetPanel.querySelectorAll('[data-subpanel]').forEach(sp=&gt;{
+          sp.classList.toggle('active', sp.dataset.subpanel===key);
+        });
+      });
+    });
+  }
+  bindSubtab('#overallSubtabs');
+  bindSubtab('#specialSubtabs');
+
+  const liveTabs = document.querySelectorAll('#liveTabs .main-tab');
+  const livePanels = document.querySelectorAll('[data-livepanel]');
+  liveTabs.forEach(tab=&gt;{
+    tab.addEventListener('click', ()=&gt;{
+      liveTabs.forEach(t=&gt;t.classList.remove('active'));
+      tab.classList.add('active');
+      livePanels.forEach(p=&gt;p.classList.toggle('active', p.dataset.livepanel===tab.dataset.live));
+    });
+  });
+
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;" title="广告经营分析看板 Interactive Demo"></iframe><div class="dashboard-note">所有名称、人员、商家与数据均为脱敏 Mock Data；交互结构参考真实项目，但不包含公司内部数据。</div></div>
+</div>
+<div class="project-pane" id="project-live">
+<div class="project-card"><div class="project-intro-clean"><div>
+<div class="project-label">CASE STUDY 02</div>
+<div class="project-title">店播运营看板</div>
+<div class="project-desc">基于四行业中小商家店播批量化运营场景重构的脱敏看板。用于追踪双月目标、店播大盘、重点商家池及关键经营指标，并辅助行业双周榜单、店播周战报与商家培育复盘。</div>
+<div class="project-points">
+<div class="point"><b>业务场景</b><span>围绕店播增长，需要同时跟踪目标进展、GMV、开播率、流量效率和重点商家表现。</span></div>
+<div class="point"><b>我的工作</b><span>参与结构拆解、字段整理、内容抽象与作品集展示版重构。</span></div>
+<div class="point"><b>页面结构</b><span>包含双月目标追踪、店播大盘、重点商家池和策略商家池等部分。</span></div>
+<div class="point"><b>能力体现</b><span>运营理解、指标归纳、重点对象识别、复杂页面信息简化表达。</span></div>
+</div>
+</div></div><div class="interactive-label">INTERACTIVE DEMO · 点击看板内部 Tab 可切换页面</div><iframe class="dashboard-frame" loading="lazy" referrerpolicy="no-referrer" srcdoc="&lt;!DOCTYPE html&gt;
+&lt;html lang=&quot;zh-CN&quot;&gt;
+&lt;head&gt;
+&lt;meta charset=&quot;UTF-8&quot;&gt;
+&lt;meta name=&quot;viewport&quot; content=&quot;width=device-width, initial-scale=1.0&quot;&gt;
+&lt;style&gt;
+html,body{margin:0;padding:0;background:#f4f6fa;font-family:Inter,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif}
+
+:root{
+  --bg:#f5f7fb; --card:#ffffff; --line:#e6eaf1; --text:#1f2937; --muted:#667085;
+  --blue:#2959d9; --blue2:#6b91ff; --blueSoft:#edf2ff; --purpleSoft:#f5efff; --yellowSoft:#fff7db;
+  --green:#16a36d; --red:#d54a4a; --orange:#e7a53d; --deep:#0f172a;
+  --shadow:0 10px 28px rgba(16,24,40,.06);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Inter,-apple-system,BlinkMacSystemFont,&quot;Segoe UI&quot;,&quot;PingFang SC&quot;,&quot;Microsoft YaHei&quot;,sans-serif}
+a{text-decoration:none;color:inherit}
+.container{width:min(1220px,calc(100% - 36px));margin:auto}
+.topnav{
+  position:sticky;top:0;z-index:30;background:rgba(245,247,251,.9);backdrop-filter:blur(14px);
+  border-bottom:1px solid rgba(230,234,241,.9)
+}
+.topnav .inner{display:flex;align-items:center;justify-content:space-between;height:68px}
+.brand{font-weight:800;letter-spacing:.2px}
+.brand span{color:var(--blue)}
+.navlinks{display:flex;gap:22px;font-size:14px;color:#475467}
+.navlinks a:hover{color:var(--blue)}
+.cta{padding:10px 14px;border-radius:10px;background:#101828;color:#fff;font-weight:700;font-size:13px}
+.hero{padding:76px 0 50px}
+.eyebrow{font-size:12px;font-weight:800;color:var(--blue);text-transform:uppercase;letter-spacing:.14em}
+.hero h1{font-size:54px;line-height:1.05;letter-spacing:-1.8px;margin:12px 0 18px}
+.hero p{max-width:760px;font-size:18px;color:var(--muted);line-height:1.8;margin:0}
+.badges{display:flex;gap:10px;flex-wrap:wrap;margin-top:24px}
+.badges span{padding:8px 10px;border-radius:999px;background:#fff;border:1px solid var(--line);font-size:12px;color:#475467}
+.section{padding:60px 0}
+.sec-head{display:flex;justify-content:space-between;align-items:flex-end;gap:20px;margin-bottom:24px}
+.sec-head h2{margin:0;font-size:34px}
+.sec-head p{margin:0;max-width:560px;color:var(--muted);line-height:1.7}
+.cards{display:grid;grid-template-columns:1.2fr .8fr .8fr;gap:16px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:20px;box-shadow:var(--shadow)}
+.card h3{margin:0 0 8px;font-size:22px}
+.card p{margin:0;color:var(--muted);line-height:1.7;font-size:14px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:14px}
+.tags span{font-size:11px;padding:7px 9px;border-radius:999px;background:#f4f6fa;color:#5a6477}
+.project-card{grid-column:1/-1}
+.case-wrap{background:#fff;border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}
+.case-top{padding:24px 26px;background:linear-gradient(135deg,#eef3ff 0%,#f9fbff 100%);border-bottom:1px solid var(--line)}
+.case-top h3{margin:0 0 8px;font-size:30px}
+.case-top p{margin:0;color:var(--muted);line-height:1.7}
+.case-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-top:18px}
+.case-mini{background:#fff;border:1px solid var(--line);border-radius:12px;padding:14px}
+.case-mini b{font-size:13px}.case-mini p{font-size:12px;color:var(--muted);margin:6px 0 0;line-height:1.6}
+.block{padding:24px 26px;border-top:1px solid var(--line)}
+.block h4{font-size:18px;margin:0 0 14px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.problem{background:#fff;border:1px solid var(--line);padding:14px;border-radius:12px;font-size:13px;color:#475467}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.flow span{padding:10px 12px;border-radius:10px;background:#fff;border:1px solid var(--line);font-size:12px;font-weight:700}
+.flow i{font-style:normal;color:#98a2b3}
+.small{font-size:12px;color:#98a2b3}
+
+/* DASHBOARD */
+.demo-shell{margin-top:14px;background:#f4f6fa;border-radius:18px;border:1px solid var(--line);padding:16px}
+.browser-bar{display:flex;align-items:center;justify-content:space-between;padding:2px 4px 14px}
+.browser-left{display:flex;align-items:center;gap:10px;color:#475467;font-size:13px}
+.burger{width:16px;height:12px;border-top:2px solid #98a2b3;border-bottom:2px solid #98a2b3;position:relative}
+.burger:after{content:&quot;&quot;;position:absolute;left:0;right:0;top:4px;border-top:2px solid #98a2b3}
+.browser-right{display:flex;align-items:center;gap:14px;color:#667085;font-size:12px}
+.browser-right .id{background:#9a1835;color:#fff;padding:4px 7px;border-radius:8px;font-weight:700}
+.db{
+  background:#f5f7fb;border-radius:16px;padding:0;overflow:hidden;border:1px solid #e9edf3
+}
+.db-header{margin:18px;border-radius:14px;background:linear-gradient(135deg,#2350d0 0%, #315edf 50%, #6a90ff 100%);padding:22px 24px;color:#fff}
+.db-title{font-size:22px;font-weight:800}
+.db-subline{font-size:13px;margin-top:8px;opacity:.88}
+.head-tags{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.head-tags span{font-size:11px;padding:5px 8px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.18)}
+.main-tabs{display:flex;gap:14px;padding:0 18px 16px;overflow:auto}
+.main-tab{
+  flex:0 0 auto; min-width:145px; padding:16px 14px;border-radius:12px;background:#fff;border:1px solid var(--line);
+  color:#475467;font-size:14px;font-weight:700;cursor:pointer;text-align:center;line-height:1.35
+}
+.main-tab.active{background:var(--blue);border-color:var(--blue);color:#fff;box-shadow:0 10px 18px rgba(41,89,217,.18)}
+.subtabs{display:flex;gap:18px;padding:4px 20px 14px;color:#667085;font-size:14px;align-items:center;flex-wrap:wrap}
+.subtab{
+  padding:8px 2px;border-bottom:2px solid transparent;cursor:pointer;display:flex;align-items:center;gap:6px
+}
+.subtab.active{color:var(--blue);font-weight:700;border-color:var(--blue)}
+.content{padding:0 18px 18px}
+.panel{display:none}
+.panel.active{display:block}
+.kpi-row{display:grid;grid-template-columns:1.1fr 1fr .95fr;gap:14px}
+.white-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px;box-shadow:0 4px 12px rgba(16,24,40,.03)}
+.white-card h5{margin:0 0 12px;font-size:15px;color:#475467}
+.big-money{font-size:27px;font-weight:800;color:#206c54}
+.helper-row{display:flex;justify-content:space-between;gap:12px;align-items:flex-start}
+.helper-list{font-size:13px;line-height:1.9;color:#475467}
+.progress-row{margin-top:14px}
+.progress-label{display:flex;justify-content:space-between;font-size:12px;color:#667085}
+.progress{height:8px;border-radius:999px;background:#eef2f7;overflow:hidden;margin-top:7px}
+.progress &gt; span{display:block;height:100%;background:#1fa16b;border-radius:inherit}
+.progress.blue &gt; span{background:#2f6ae6}
+.note-box{margin-top:16px;background:#fff7df;border:1px solid #f4e1a3;border-radius:10px;padding:12px 14px;font-size:12px;color:#815c1b}
+.compare-stat{font-size:18px;font-weight:800}
+.compare-stack{display:grid;gap:18px;padding-top:6px}
+.compare-stack .item b{display:block;font-size:13px;color:#667085;margin-bottom:6px}
+.compare-stack .item span{font-size:14px;color:#475467}
+.chart-card{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:14px;padding:14px 16px}
+.chart-title{font-size:14px;font-weight:700;color:#475467}
+.chart-sub{font-size:12px;color:#98a2b3;margin-top:3px}
+svg.chart{width:100%;height:220px;display:block;margin-top:8px}
+.legend{display:flex;gap:14px;font-size:12px;color:#667085;margin-top:8px}
+.legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:middle}
+.i-grey{background:#aab4c8}.i-green{background:#4fa989}.i-blue{background:#3f69e0}.i-red{background:#cc5560}.i-purple{background:#6d54f4}.i-black{background:#2b2f38}
+
+/* tables */
+.table-card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:0;overflow:hidden}
+.table-note{padding:14px 16px;border-bottom:1px solid var(--line);font-size:12px;color:#667085}
+.table-wrap{overflow:auto}
+table{width:100%;border-collapse:separate;border-spacing:0;font-size:13px}
+th,td{padding:12px 12px;border-bottom:1px solid #eef2f6;text-align:left;white-space:nowrap}
+thead th{background:#fafbfe;color:#667085;font-weight:700}
+th.group-yellow{background:#fff9de}
+th.group-blue{background:#eef5ff}
+th.group-purple{background:#f5efff}
+tbody tr:hover{background:#fbfcff}
+tfoot td{background:#16254b;color:#fff;font-weight:700}
+.badge-status{display:inline-flex;align-items:center;gap:6px;border-radius:999px;padding:4px 9px;font-size:12px;font-weight:700}
+.s-green{background:#ecfdf3;color:#16794e}.s-red{background:#fef0f0;color:#b53636}.s-orange{background:#fff7e5;color:#9b6b15}
+.s-grey{background:#f3f4f7;color:#596275}
+.k-tag{display:inline-block;padding:3px 8px;border-radius:999px;font-size:11px;font-weight:700;color:#fff}
+.kt1{background:#b4802a}.kt2{background:#5278e2}.kt3{background:#54a57b}.kt4{background:#8d3dac}
+.pill-dot{display:inline-block;padding:4px 8px;border-radius:999px;background:#f4f6fa;font-size:11px;color:#596275}
+.small-charts{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+.small-chart{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px}
+.small-chart .head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.small-chart .head b{font-size:13px}
+.small-chart .head span{font-size:11px;font-weight:700}
+.small-chart svg{width:100%;height:160px;display:block}
+.filter-bar{display:flex;gap:10px;flex-wrap:wrap;padding:14px 16px;border-bottom:1px solid var(--line);background:#fff}
+.fake-select,.fake-search,.fake-btn{
+  height:36px;display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;background:#fff;
+  padding:0 12px;font-size:12px;color:#475467
+}
+.fake-select{min-width:110px;justify-content:space-between;gap:10px}
+.fake-search{min-width:180px;flex:1}
+.fake-btn{background:#315edf;color:#fff;font-weight:700;border-color:#315edf}
+.cell-soft{color:#475467}
+.cell-weak{color:#98a2b3}
+.client-name b{display:block}.client-name span{font-size:11px;color:#98a2b3}
+.level{display:inline-block;padding:4px 8px;border-radius:999px;font-size:11px;font-weight:800;color:#fff}
+.lv1{background:#d5a23f}.lv2{background:#4cba70}.lv3{background:#e48a4d}.lv4{background:#cc5871}.lv5{background:#5b76d8}
+.action-btn{display:inline-block;padding:5px 9px;border-radius:8px;border:1px solid #e9c37a;background:#f4cf8a;color:#8e5c0d;font-size:11px;font-weight:700}
+.placeholder{background:#fff;border:1px dashed #ccd5e6;border-radius:14px;padding:40px 20px;text-align:center;color:#667085}
+.placeholder b{display:block;font-size:18px;color:#344054;margin-bottom:8px}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.about-card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:20px;box-shadow:var(--shadow)}
+.about-card h3{margin:0 0 10px}
+.about-card p{margin:0;color:var(--muted);line-height:1.8}
+.timeline{display:grid;gap:12px}
+.timeline-item{padding-left:14px;border-left:2px solid #dfe6ff}
+.timeline-item b{font-size:13px}.timeline-item p{margin:4px 0 0;font-size:12px;color:var(--muted);line-height:1.7}
+.footer{padding:34px 0 48px;text-align:center;color:#98a2b3;font-size:12px}
+@media (max-width:980px){
+  .navlinks{display:none}.hero h1{font-size:40px}
+  .cards,.case-grid,.kpi-row,.grid2,.small-charts,.about-grid{grid-template-columns:1fr}
+}
+
+.live-kpi-grid .kpi{min-width:0}
+.live-kpi-grid .kpi strong{white-space:nowrap}
+@media(max-width:1100px){.live-kpi-grid{grid-template-columns:repeat(3,minmax(0,1fr)) !important}}
+@media(max-width:760px){.live-kpi-grid{grid-template-columns:repeat(2,minmax(0,1fr)) !important}}
+
+body{padding:0}
+.demo-shell{margin:0;border:none;border-radius:0}
+&lt;/style&gt;
+&lt;/head&gt;
+&lt;body&gt;
+&lt;div class=&quot;demo-shell&quot;&gt;
+&lt;div class=&quot;browser-bar&quot;&gt;
+&lt;div class=&quot;browser-left&quot;&gt;&lt;span class=&quot;burger&quot;&gt;&lt;/span&gt;&lt;span&gt;← 返回 APP&lt;/span&gt;&lt;b&gt;店播指标板 · 客群运营&lt;/b&gt;&lt;/div&gt;
+&lt;div class=&quot;browser-right&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;db&quot;&gt;
+&lt;div style=&quot;padding:18px 20px 6px&quot;&gt;
+&lt;div style=&quot;font-size:21px;font-weight:800&quot;&gt;店播指标板 · 客群运营组&lt;/div&gt;
+&lt;div class=&quot;small&quot; style=&quot;margin-top:5px&quot;&gt;数据范围：Mock Dataset · 最近更新时间 2026-08-11 · 全量字段均已脱敏&lt;/div&gt;
+&lt;div style=&quot;margin-top:18px;display:flex;gap:14px;flex-wrap:wrap;align-items:center&quot;&gt;
+&lt;span class=&quot;small&quot; style=&quot;font-weight:700;color:#475467&quot;&gt;时间周期&lt;/span&gt;
+&lt;span class=&quot;pill-dot&quot; style=&quot;background:#eef2ff;color:#315edf&quot;&gt;近 7 天&lt;/span&gt;
+&lt;span class=&quot;pill-dot&quot;&gt;双月&lt;/span&gt;
+&lt;span class=&quot;pill-dot&quot;&gt;自定义&lt;/span&gt;
+&lt;span class=&quot;small&quot; style=&quot;font-weight:700;color:#475467;margin-left:10px&quot;&gt;对比方式&lt;/span&gt;
+&lt;span class=&quot;pill-dot&quot;&gt;环比&lt;/span&gt;
+&lt;span class=&quot;pill-dot&quot;&gt;双月同期对比&lt;/span&gt;
+&lt;/div&gt;
+&lt;div style=&quot;margin-top:10px;font-size:12px;color:#315edf&quot;&gt;
+                本期 2026-08-05 – 2026-08-11 &lt;span style=&quot;color:#98a2b3;margin:0 8px&quot;&gt;VS&lt;/span&gt; 上 7 天 2026-07-29 – 2026-08-04
+              &lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;main-tabs&quot; id=&quot;liveTabs&quot; style=&quot;padding-top:10px&quot;&gt;
+&lt;div class=&quot;main-tab active&quot; data-live=&quot;goal&quot;&gt;Tab 1 · 双月目标追踪&lt;/div&gt;
+&lt;div class=&quot;main-tab&quot; data-live=&quot;overview&quot;&gt;Tab 2 · 店播大盘&lt;/div&gt;
+&lt;div class=&quot;main-tab&quot; data-live=&quot;focus&quot;&gt;Tab 3 · 店播重点商家池&lt;/div&gt;
+&lt;div class=&quot;main-tab&quot; data-live=&quot;strategy&quot;&gt;Tab 4 · 店播策略商家池&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;content&quot;&gt;
+&lt;!-- goal tracking --&gt;
+&lt;div class=&quot;panel active&quot; data-livepanel=&quot;goal&quot;&gt;
+&lt;div class=&quot;table-card&quot;&gt;
+&lt;div class=&quot;table-note&quot;&gt;&lt;b&gt;板块一 · 目标拆解与进展&lt;/b&gt;&lt;br/&gt;当前目标：本期目标周期 2026-07-01 – 2026-08-04 · 当前阶段 2026-08-05 – 2026-08-11&lt;/div&gt;
+&lt;div class=&quot;table-wrap&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;客群 / 层级&lt;/th&gt;
+&lt;th&gt;占大盘比&lt;/th&gt;
+&lt;th&gt;客户数&lt;/th&gt;
+&lt;th&gt;本期 GMV&lt;/th&gt;
+&lt;th&gt;同期 GMV&lt;/th&gt;
+&lt;th&gt;当前同比&lt;/th&gt;
+&lt;th&gt;目标 GMV 进度&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;b&gt;核心层&lt;/b&gt;&lt;div class=&quot;small&quot;&gt;核心经营客群&lt;/div&gt;&lt;/td&gt;
+&lt;td&gt;&lt;span class=&quot;pill-dot&quot; style=&quot;background:#e9e8ff;color:#5d56da&quot;&gt;21%&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;98&lt;/td&gt;&lt;td&gt;¥2.31M&lt;/td&gt;&lt;td&gt;¥1.87M&lt;/td&gt;
+&lt;td style=&quot;color:#159a68&quot;&gt;+23.6%&lt;/td&gt;
+&lt;td&gt;&lt;div class=&quot;progress blue&quot;&gt;&lt;span style=&quot;width:82%&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;b&gt;重点层&lt;/b&gt;&lt;div class=&quot;small&quot;&gt;重点经营客群&lt;/div&gt;&lt;/td&gt;
+&lt;td&gt;&lt;span class=&quot;pill-dot&quot; style=&quot;background:#ece9ff;color:#6a60d8&quot;&gt;35%&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;236&lt;/td&gt;&lt;td&gt;¥3.86M&lt;/td&gt;&lt;td&gt;¥2.97M&lt;/td&gt;
+&lt;td style=&quot;color:#159a68&quot;&gt;+30.1%&lt;/td&gt;
+&lt;td&gt;&lt;div class=&quot;progress blue&quot;&gt;&lt;span style=&quot;width:74%&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;b&gt;新客层&lt;/b&gt;&lt;div class=&quot;small&quot;&gt;新开播商家&lt;/div&gt;&lt;/td&gt;
+&lt;td&gt;&lt;span class=&quot;pill-dot&quot;&gt;7%&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;1,082&lt;/td&gt;&lt;td&gt;¥0.61M&lt;/td&gt;&lt;td&gt;¥0.96M&lt;/td&gt;
+&lt;td style=&quot;color:#d54a4a&quot;&gt;-36.5%&lt;/td&gt;
+&lt;td&gt;&lt;div class=&quot;progress&quot;&gt;&lt;span style=&quot;width:46%;background:#b7b7bd&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;b&gt;成长层&lt;/b&gt;&lt;div class=&quot;small&quot;&gt;成长型经营商家&lt;/div&gt;&lt;/td&gt;
+&lt;td&gt;&lt;span class=&quot;pill-dot&quot; style=&quot;background:#eef2ef;color:#5f7967&quot;&gt;37%&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;3,604&lt;/td&gt;&lt;td&gt;¥4.12M&lt;/td&gt;&lt;td&gt;¥5.91M&lt;/td&gt;
+&lt;td style=&quot;color:#d54a4a&quot;&gt;-30.3%&lt;/td&gt;
+&lt;td&gt;&lt;div class=&quot;progress&quot;&gt;&lt;span style=&quot;width:55%;background:#7a827d&quot;&gt;&lt;/span&gt;&lt;/div&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;tfoot&gt;&lt;tr&gt;&lt;td&gt;大盘合计&lt;/td&gt;&lt;td&gt;100%&lt;/td&gt;&lt;td&gt;5,020&lt;/td&gt;&lt;td&gt;¥10.90M&lt;/td&gt;&lt;td&gt;¥11.71M&lt;/td&gt;&lt;td&gt;-6.9%&lt;/td&gt;&lt;td&gt;—&lt;/td&gt;&lt;/tr&gt;&lt;/tfoot&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;table-card&quot; style=&quot;margin-top:14px&quot;&gt;
+&lt;div class=&quot;table-note&quot;&gt;&lt;b&gt;完成率 80% / 90% 目标判断&lt;/b&gt; · 目标 GMV = 基期 GMV × 目标增速&lt;/div&gt;
+&lt;div class=&quot;table-wrap&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;客群&lt;/th&gt;&lt;th&gt;当前 GMV&lt;/th&gt;&lt;th&gt;当前同比&lt;/th&gt;
+&lt;th class=&quot;group-yellow&quot;&gt;80% 目标 GMV&lt;/th&gt;&lt;th class=&quot;group-yellow&quot;&gt;80% 目标增速&lt;/th&gt;&lt;th class=&quot;group-yellow&quot;&gt;80% Gap&lt;/th&gt;
+&lt;th class=&quot;group-blue&quot;&gt;90% 目标 GMV&lt;/th&gt;&lt;th class=&quot;group-blue&quot;&gt;90% 目标增速&lt;/th&gt;&lt;th class=&quot;group-blue&quot;&gt;90% Gap&lt;/th&gt;&lt;th&gt;结论&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;大盘&lt;/td&gt;&lt;td&gt;¥10.90M&lt;/td&gt;&lt;td&gt;-6.9%&lt;/td&gt;&lt;td&gt;¥11.78M&lt;/td&gt;&lt;td&gt;+2%&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-8.1pp&lt;/td&gt;&lt;td&gt;¥12.93M&lt;/td&gt;&lt;td&gt;+12%&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-18.9pp&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;未达标&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;核心层&lt;/td&gt;&lt;td&gt;¥2.31M&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+23.6%&lt;/td&gt;&lt;td&gt;¥2.64M&lt;/td&gt;&lt;td&gt;+28%&lt;/td&gt;&lt;td&gt;-4.4pp&lt;/td&gt;&lt;td&gt;¥2.86M&lt;/td&gt;&lt;td&gt;+40%&lt;/td&gt;&lt;td&gt;-16.4pp&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;接近达标&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;重点层&lt;/td&gt;&lt;td&gt;¥3.86M&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+30.1%&lt;/td&gt;&lt;td&gt;¥3.76M&lt;/td&gt;&lt;td&gt;+15%&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+15.1pp&lt;/td&gt;&lt;td&gt;¥3.95M&lt;/td&gt;&lt;td&gt;+28%&lt;/td&gt;&lt;td&gt;+2.1pp&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;已达标&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;新客层&lt;/td&gt;&lt;td&gt;¥0.61M&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-36.5%&lt;/td&gt;&lt;td&gt;¥0.95M&lt;/td&gt;&lt;td&gt;+0%&lt;/td&gt;&lt;td&gt;-36.5pp&lt;/td&gt;&lt;td&gt;¥1.01M&lt;/td&gt;&lt;td&gt;+8%&lt;/td&gt;&lt;td&gt;-44.5pp&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;未达标&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;成长层&lt;/td&gt;&lt;td&gt;¥4.12M&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-30.3%&lt;/td&gt;&lt;td&gt;¥4.92M&lt;/td&gt;&lt;td&gt;-2%&lt;/td&gt;&lt;td&gt;-28.3pp&lt;/td&gt;&lt;td&gt;¥5.20M&lt;/td&gt;&lt;td&gt;+10%&lt;/td&gt;&lt;td&gt;-40.3pp&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;未达标&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- overview --&gt;
+&lt;div class=&quot;panel&quot; data-livepanel=&quot;overview&quot;&gt;
+&lt;div class=&quot;subtabs&quot; id=&quot;liveOverviewSubtabs&quot;&gt;
+&lt;div class=&quot;subtab active&quot;&gt;部门视角&lt;/div&gt;
+&lt;div class=&quot;subtab&quot;&gt;行业视角&lt;/div&gt;
+&lt;div class=&quot;subtab&quot;&gt;AM 视角&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;white-card&quot; style=&quot;background:#fff7ea;border-color:#f0dec0&quot;&gt;
+&lt;h5&gt;🔥 实时 · 店播大盘核心指标&lt;/h5&gt;
+&lt;div class=&quot;live-kpi-grid&quot; style=&quot;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px&quot;&gt;
+&lt;div class=&quot;kpi&quot;&gt;&lt;label&gt;店播 GMV&lt;/label&gt;&lt;strong style=&quot;font-size:20px&quot;&gt;¥2.38M&lt;/strong&gt;&lt;small class=&quot;up&quot;&gt;▲ 4.1% 环比&lt;/small&gt;&lt;/div&gt;
+&lt;div class=&quot;kpi&quot;&gt;&lt;label&gt;开播商家数&lt;/label&gt;&lt;strong style=&quot;font-size:20px&quot;&gt;4,086&lt;/strong&gt;&lt;small style=&quot;color:#d54a4a&quot;&gt;▼ 1.0% 环比&lt;/small&gt;&lt;/div&gt;
+&lt;div class=&quot;kpi&quot;&gt;&lt;label&gt;店播购买 UV&lt;/label&gt;&lt;strong style=&quot;font-size:20px&quot;&gt;158,940&lt;/strong&gt;&lt;small style=&quot;color:#d54a4a&quot;&gt;▼ 2.1% 环比&lt;/small&gt;&lt;/div&gt;
+&lt;div class=&quot;kpi&quot;&gt;&lt;label&gt;店播客单价&lt;/label&gt;&lt;strong style=&quot;font-size:20px&quot;&gt;¥91.24&lt;/strong&gt;&lt;small class=&quot;up&quot;&gt;▲ 5.4% 环比&lt;/small&gt;&lt;/div&gt;
+&lt;div class=&quot;kpi&quot;&gt;&lt;label&gt;店播 GPM&lt;/label&gt;&lt;strong style=&quot;font-size:20px&quot;&gt;51.86&lt;/strong&gt;&lt;small class=&quot;up&quot;&gt;▲ 8.9% 环比&lt;/small&gt;&lt;/div&gt;
+&lt;div class=&quot;kpi&quot;&gt;&lt;label&gt;店播 CTR&lt;/label&gt;&lt;strong style=&quot;font-size:20px&quot;&gt;2.58%&lt;/strong&gt;&lt;small style=&quot;color:#d54a4a&quot;&gt;▼ 0.7% 环比&lt;/small&gt;&lt;/div&gt;
+&lt;div class=&quot;kpi&quot;&gt;&lt;label&gt;店播 CVR&lt;/label&gt;&lt;strong style=&quot;font-size:20px&quot;&gt;1.24%&lt;/strong&gt;&lt;small style=&quot;color:#d54a4a&quot;&gt;▼ 0.2% 环比&lt;/small&gt;&lt;/div&gt;
+&lt;div class=&quot;kpi&quot;&gt;&lt;label&gt;停留深度指数&lt;/label&gt;&lt;strong style=&quot;font-size:20px&quot;&gt;6.18&lt;/strong&gt;&lt;small class=&quot;up&quot;&gt;▲ 1.0% 环比&lt;/small&gt;&lt;/div&gt;
+&lt;div class=&quot;kpi&quot;&gt;&lt;label&gt;日均直播时长&lt;/label&gt;&lt;strong style=&quot;font-size:20px&quot;&gt;5.48 h&lt;/strong&gt;&lt;small style=&quot;color:#d54a4a&quot;&gt;▼ 1.8% 环比&lt;/small&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div style=&quot;margin-top:14px;background:linear-gradient(90deg,#4430d7,#6d5bd9,#5138c5);color:#fff;border-radius:12px;padding:20px 18px&quot;&gt;
+&lt;div class=&quot;small&quot; style=&quot;color:#ddd7ff&quot;&gt;本期店播 DGMV&lt;/div&gt;
+&lt;div style=&quot;display:flex;gap:34px;align-items:flex-end;flex-wrap:wrap;margin-top:4px&quot;&gt;
+&lt;div style=&quot;font-size:31px;font-weight:800&quot;&gt;2.38 &lt;span style=&quot;font-size:14px&quot;&gt;百万&lt;/span&gt;&lt;/div&gt;
+&lt;div&gt;&lt;span class=&quot;small&quot; style=&quot;color:#ddd7ff&quot;&gt;环比增长&lt;/span&gt;&lt;br/&gt;&lt;b style=&quot;font-size:22px;color:#7ae28f&quot;&gt;+92K&lt;/b&gt;&lt;/div&gt;
+&lt;div&gt;&lt;span class=&quot;small&quot; style=&quot;color:#ddd7ff&quot;&gt;环比增速&lt;/span&gt;&lt;br/&gt;&lt;b style=&quot;font-size:22px;color:#7ae28f&quot;&gt;▲ +4.1%&lt;/b&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;table-card&quot; style=&quot;margin-top:14px&quot;&gt;
+&lt;div class=&quot;table-note&quot;&gt;&lt;b&gt;店播行业分赛道明细&lt;/b&gt; · 示例展示脱敏行业结构&lt;/div&gt;
+&lt;div class=&quot;table-wrap&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;&lt;th&gt;行业赛道&lt;/th&gt;&lt;th&gt;店播 GMV&lt;/th&gt;&lt;th&gt;开播商家数&lt;/th&gt;&lt;th&gt;开播渗透率&lt;/th&gt;&lt;th&gt;单家店播 GMV&lt;/th&gt;&lt;th&gt;单家成交深度&lt;/th&gt;&lt;th&gt;日均直播时长&lt;/th&gt;&lt;th&gt;每小时 GMV&lt;/th&gt;&lt;th&gt;店播 GPM&lt;/th&gt;&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;整体&lt;/td&gt;&lt;td&gt;¥2.38M&lt;/td&gt;&lt;td&gt;4,086&lt;/td&gt;&lt;td&gt;2.6%&lt;/td&gt;&lt;td&gt;¥5.82K&lt;/td&gt;&lt;td&gt;6.18&lt;/td&gt;&lt;td&gt;5.5h&lt;/td&gt;&lt;td&gt;¥1.01K&lt;/td&gt;&lt;td&gt;51.86&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;时尚消费&lt;/td&gt;&lt;td&gt;¥0.76M&lt;/td&gt;&lt;td&gt;1,204&lt;/td&gt;&lt;td&gt;3.2%&lt;/td&gt;&lt;td&gt;¥6.31K&lt;/td&gt;&lt;td&gt;6.72&lt;/td&gt;&lt;td&gt;5.8h&lt;/td&gt;&lt;td&gt;¥1.09K&lt;/td&gt;&lt;td&gt;55.12&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;家居生活&lt;/td&gt;&lt;td&gt;¥0.58M&lt;/td&gt;&lt;td&gt;882&lt;/td&gt;&lt;td&gt;2.1%&lt;/td&gt;&lt;td&gt;¥6.58K&lt;/td&gt;&lt;td&gt;6.35&lt;/td&gt;&lt;td&gt;5.2h&lt;/td&gt;&lt;td&gt;¥1.27K&lt;/td&gt;&lt;td&gt;53.48&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;美妆个护&lt;/td&gt;&lt;td&gt;¥0.49M&lt;/td&gt;&lt;td&gt;736&lt;/td&gt;&lt;td&gt;2.8%&lt;/td&gt;&lt;td&gt;¥6.66K&lt;/td&gt;&lt;td&gt;6.01&lt;/td&gt;&lt;td&gt;5.6h&lt;/td&gt;&lt;td&gt;¥1.19K&lt;/td&gt;&lt;td&gt;50.77&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;食品饮料&lt;/td&gt;&lt;td&gt;¥0.31M&lt;/td&gt;&lt;td&gt;642&lt;/td&gt;&lt;td&gt;1.8%&lt;/td&gt;&lt;td&gt;¥4.83K&lt;/td&gt;&lt;td&gt;5.64&lt;/td&gt;&lt;td&gt;4.9h&lt;/td&gt;&lt;td&gt;¥0.99K&lt;/td&gt;&lt;td&gt;47.25&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;其他&lt;/td&gt;&lt;td&gt;¥0.24M&lt;/td&gt;&lt;td&gt;622&lt;/td&gt;&lt;td&gt;1.5%&lt;/td&gt;&lt;td&gt;¥3.86K&lt;/td&gt;&lt;td&gt;5.21&lt;/td&gt;&lt;td&gt;4.7h&lt;/td&gt;&lt;td&gt;¥0.82K&lt;/td&gt;&lt;td&gt;45.73&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div style=&quot;margin-top:14px&quot;&gt;
+&lt;div class=&quot;chart-title&quot;&gt;店播整体 · 核心指标矩阵&lt;/div&gt;
+&lt;div class=&quot;small-charts&quot; style=&quot;grid-template-columns:repeat(4,1fr)&quot;&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;粉丝购买数&lt;/b&gt;&lt;span style=&quot;color:#159a68&quot;&gt;+0.2%&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size:24px;font-weight:800&quot;&gt;33,842&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;动销开播商家数&lt;/b&gt;&lt;span style=&quot;color:#159a68&quot;&gt;+0.1%&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size:24px;font-weight:800&quot;&gt;2,968&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;动销开播率&lt;/b&gt;&lt;span style=&quot;color:#d54a4a&quot;&gt;-0.8%&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size:24px;font-weight:800&quot;&gt;12.38%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;店播 DGMV&lt;/b&gt;&lt;span style=&quot;color:#159a68&quot;&gt;+4.1%&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size:24px;font-weight:800&quot;&gt;2.38M&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;直播曝光 UV&lt;/b&gt;&lt;span style=&quot;color:#d54a4a&quot;&gt;-6.4%&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size:24px;font-weight:800&quot;&gt;14,906&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;直播观看 UV&lt;/b&gt;&lt;span style=&quot;color:#159a68&quot;&gt;+0.5%&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size:24px;font-weight:800&quot;&gt;14,225&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;店播单次 UV&lt;/b&gt;&lt;span style=&quot;color:#d54a4a&quot;&gt;-2.2%&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size:24px;font-weight:800&quot;&gt;16.4&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;日播客单价&lt;/b&gt;&lt;span style=&quot;color:#159a68&quot;&gt;+8.5%&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;font-size:24px;font-weight:800&quot;&gt;91.2&lt;/div&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- focus merchants --&gt;
+&lt;div class=&quot;panel&quot; data-livepanel=&quot;focus&quot;&gt;
+&lt;div class=&quot;table-card&quot;&gt;
+&lt;div class=&quot;table-note&quot;&gt;&lt;b&gt;店播重点商家池&lt;/b&gt; · 12 家重点商家 · 最近 30 天动态圈选 · 所有商家名均为虚构&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-charts&quot; style=&quot;grid-template-columns:1fr 1fr;margin-top:14px&quot;&gt;
+&lt;div class=&quot;small-chart&quot;&gt;
+&lt;div class=&quot;head&quot;&gt;&lt;b&gt;重点商家店播 DGMV&lt;/b&gt;&lt;span style=&quot;color:#159a68&quot;&gt;周度趋势&lt;/span&gt;&lt;/div&gt;
+&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 420 190&quot;&gt;
+&lt;line stroke=&quot;#e7ebf2&quot; x1=&quot;30&quot; x2=&quot;30&quot; y1=&quot;20&quot; y2=&quot;165&quot;&gt;&lt;/line&gt;&lt;line stroke=&quot;#e7ebf2&quot; x1=&quot;30&quot; x2=&quot;405&quot; y1=&quot;165&quot; y2=&quot;165&quot;&gt;&lt;/line&gt;
+&lt;polyline fill=&quot;none&quot; points=&quot;40,66 120,58 200,55 280,140 360,154&quot; stroke=&quot;#5d8f6a&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;
+&lt;text fill=&quot;#4e7d5a&quot; font-size=&quot;10&quot; x=&quot;40&quot; y=&quot;55&quot;&gt;760K&lt;/text&gt;&lt;text fill=&quot;#4e7d5a&quot; font-size=&quot;10&quot; x=&quot;195&quot; y=&quot;44&quot;&gt;845K&lt;/text&gt;
+&lt;/svg&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;
+&lt;div class=&quot;head&quot;&gt;&lt;b&gt;分 AM 联动 · 店播 DGMV&lt;/b&gt;&lt;span class=&quot;cell-weak&quot;&gt;趋势&lt;/span&gt;&lt;/div&gt;
+&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 420 190&quot;&gt;
+&lt;polyline fill=&quot;none&quot; points=&quot;20,80 100,74 180,69 260,154 400,158&quot; stroke=&quot;#315edf&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;
+&lt;polyline fill=&quot;none&quot; points=&quot;20,58 100,50 180,47 260,149 400,158&quot; stroke=&quot;#7b915e&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;
+&lt;polyline fill=&quot;none&quot; points=&quot;20,100 100,94 180,88 260,156 400,159&quot; stroke=&quot;#b45858&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;
+&lt;polyline fill=&quot;none&quot; points=&quot;20,115 100,110 180,107 260,157 400,160&quot; stroke=&quot;#8c6f9d&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;
+&lt;/svg&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div style=&quot;margin-top:14px&quot;&gt;
+&lt;div class=&quot;chart-title&quot;&gt;重点商家 · 关键指标趋势&lt;/div&gt;
+&lt;div class=&quot;small-charts&quot; style=&quot;grid-template-columns:repeat(4,1fr)&quot;&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;店播 DGMV&lt;/b&gt;&lt;span&gt;850.6&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,60 45,55 80,53 115,54 150,57 185,55 225,48&quot; stroke=&quot;#6656d4&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#159a68&quot;&gt;环比 +11.4%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;场均 DGMV&lt;/b&gt;&lt;span&gt;0.53&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,63 45,56 80,54 115,56 150,58 185,55 225,45&quot; stroke=&quot;#6656d4&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#159a68&quot;&gt;环比 +8.5%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;开播商家数&lt;/b&gt;&lt;span&gt;218&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,60 45,57 80,53 115,55 150,59 185,61 225,64&quot; stroke=&quot;#6656d4&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#d54a4a&quot;&gt;环比 -0.5%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;开播率&lt;/b&gt;&lt;span&gt;94.6&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,65 45,61 80,55 115,52 150,51 185,53 225,58&quot; stroke=&quot;#6656d4&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#d54a4a&quot;&gt;环比 -0.4%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;呼吸灯曝光&lt;/b&gt;&lt;span&gt;4,238&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,62 45,56 80,52 115,54 150,58 185,55 225,56&quot; stroke=&quot;#5d9f83&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#d54a4a&quot;&gt;环比 -5.9%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;直播卡曝光&lt;/b&gt;&lt;span&gt;5,406&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,63 45,60 80,58 115,55 150,53 185,49 225,42&quot; stroke=&quot;#5d9f83&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#159a68&quot;&gt;环比 +3.2%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;呼吸灯 CTR&lt;/b&gt;&lt;span&gt;1.51&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,57 45,58 80,56 115,54 150,52 185,48 225,44&quot; stroke=&quot;#5d9f83&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#159a68&quot;&gt;环比 +0.3%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;直播卡 CTR&lt;/b&gt;&lt;span&gt;3.28&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,48 45,46 80,45 115,44 150,45 185,47 225,58&quot; stroke=&quot;#5d9f83&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#d54a4a&quot;&gt;环比 -0.3%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;每播商家成交数&lt;/b&gt;&lt;span&gt;7.9&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,62 45,58 80,55 115,54 150,53 185,52 225,48&quot; stroke=&quot;#477abf&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;单商家日均开播时长&lt;/b&gt;&lt;span&gt;8.6&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,63 45,56 80,53 115,52 150,53 185,56 225,58&quot; stroke=&quot;#477abf&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;店播转化深度&lt;/b&gt;&lt;span&gt;14.7&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,62 45,58 80,57 115,54 150,53 185,51 225,44&quot; stroke=&quot;#477abf&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;店播客单价&lt;/b&gt;&lt;span&gt;14.9&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,54 45,51 80,50 115,50 150,51 185,55 225,61&quot; stroke=&quot;#477abf&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;table-card&quot; style=&quot;margin-top:14px&quot;&gt;
+&lt;div class=&quot;table-note&quot;&gt;&lt;b&gt;重点商家明细&lt;/b&gt; · 虚拟商家名 / 虚拟 AM&lt;/div&gt;
+&lt;div class=&quot;table-wrap&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;商家&lt;/th&gt;&lt;th&gt;AM&lt;/th&gt;&lt;th&gt;行业&lt;/th&gt;&lt;th&gt;本期 DGMV&lt;/th&gt;&lt;th&gt;环比&lt;/th&gt;&lt;th&gt;开播率&lt;/th&gt;&lt;th&gt;CTR&lt;/th&gt;&lt;th&gt;CVR&lt;/th&gt;&lt;th&gt;状态&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Northbay Studio&lt;/td&gt;&lt;td&gt;AM A&lt;/td&gt;&lt;td&gt;时尚消费&lt;/td&gt;&lt;td&gt;¥128.4K&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+12.8%&lt;/td&gt;&lt;td&gt;96.1%&lt;/td&gt;&lt;td&gt;3.4%&lt;/td&gt;&lt;td&gt;1.6%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;增长&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Olea Market&lt;/td&gt;&lt;td&gt;AM B&lt;/td&gt;&lt;td&gt;美妆个护&lt;/td&gt;&lt;td&gt;¥117.6K&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+8.5%&lt;/td&gt;&lt;td&gt;94.2%&lt;/td&gt;&lt;td&gt;3.1%&lt;/td&gt;&lt;td&gt;1.4%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;稳定&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Horizon Goods&lt;/td&gt;&lt;td&gt;AM C&lt;/td&gt;&lt;td&gt;家居生活&lt;/td&gt;&lt;td&gt;¥96.3K&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-4.3%&lt;/td&gt;&lt;td&gt;89.7%&lt;/td&gt;&lt;td&gt;2.6%&lt;/td&gt;&lt;td&gt;1.1%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;关注&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Daylight Lab&lt;/td&gt;&lt;td&gt;AM D&lt;/td&gt;&lt;td&gt;食品饮料&lt;/td&gt;&lt;td&gt;¥88.9K&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-9.6%&lt;/td&gt;&lt;td&gt;84.5%&lt;/td&gt;&lt;td&gt;2.2%&lt;/td&gt;&lt;td&gt;0.9%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;风险&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;!-- strategy --&gt;
+&lt;div class=&quot;panel&quot; data-livepanel=&quot;strategy&quot;&gt;
+&lt;div class=&quot;table-card&quot;&gt;
+&lt;div class=&quot;table-note&quot;&gt;&lt;b&gt;店播策略商家池&lt;/b&gt; · 12 家策略商家 · 最近 30 天动态圈选 · 所有商家名均为虚构&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-charts&quot; style=&quot;grid-template-columns:1fr 1fr;margin-top:14px&quot;&gt;
+&lt;div class=&quot;small-chart&quot;&gt;
+&lt;div class=&quot;head&quot;&gt;&lt;b&gt;策略商家店播 DGMV&lt;/b&gt;&lt;span style=&quot;color:#159a68&quot;&gt;周度趋势&lt;/span&gt;&lt;/div&gt;
+&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 420 190&quot;&gt;
+&lt;line stroke=&quot;#e7ebf2&quot; x1=&quot;30&quot; x2=&quot;30&quot; y1=&quot;20&quot; y2=&quot;165&quot;&gt;&lt;/line&gt;&lt;line stroke=&quot;#e7ebf2&quot; x1=&quot;30&quot; x2=&quot;405&quot; y1=&quot;165&quot; y2=&quot;165&quot;&gt;&lt;/line&gt;
+&lt;polyline fill=&quot;none&quot; points=&quot;40,66 120,58 200,55 280,140 360,154&quot; stroke=&quot;#5d8f6a&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;
+&lt;text fill=&quot;#4e7d5a&quot; font-size=&quot;10&quot; x=&quot;40&quot; y=&quot;55&quot;&gt;760K&lt;/text&gt;&lt;text fill=&quot;#4e7d5a&quot; font-size=&quot;10&quot; x=&quot;195&quot; y=&quot;44&quot;&gt;845K&lt;/text&gt;
+&lt;/svg&gt;
+&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;
+&lt;div class=&quot;head&quot;&gt;&lt;b&gt;分 AM 联动 · 店播 DGMV&lt;/b&gt;&lt;span class=&quot;cell-weak&quot;&gt;趋势&lt;/span&gt;&lt;/div&gt;
+&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 420 190&quot;&gt;
+&lt;polyline fill=&quot;none&quot; points=&quot;20,80 100,74 180,69 260,154 400,158&quot; stroke=&quot;#315edf&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;
+&lt;polyline fill=&quot;none&quot; points=&quot;20,58 100,50 180,47 260,149 400,158&quot; stroke=&quot;#7b915e&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;
+&lt;polyline fill=&quot;none&quot; points=&quot;20,100 100,94 180,88 260,156 400,159&quot; stroke=&quot;#b45858&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;
+&lt;polyline fill=&quot;none&quot; points=&quot;20,115 100,110 180,107 260,157 400,160&quot; stroke=&quot;#8c6f9d&quot; stroke-width=&quot;2&quot;&gt;&lt;/polyline&gt;
+&lt;/svg&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div style=&quot;margin-top:14px&quot;&gt;
+&lt;div class=&quot;chart-title&quot;&gt;策略商家 · 关键指标趋势&lt;/div&gt;
+&lt;div class=&quot;small-charts&quot; style=&quot;grid-template-columns:repeat(4,1fr)&quot;&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;店播 DGMV&lt;/b&gt;&lt;span&gt;850.6&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,60 45,55 80,53 115,54 150,57 185,55 225,48&quot; stroke=&quot;#6656d4&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#159a68&quot;&gt;环比 +11.4%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;场均 DGMV&lt;/b&gt;&lt;span&gt;0.53&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,63 45,56 80,54 115,56 150,58 185,55 225,45&quot; stroke=&quot;#6656d4&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#159a68&quot;&gt;环比 +8.5%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;开播商家数&lt;/b&gt;&lt;span&gt;218&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,60 45,57 80,53 115,55 150,59 185,61 225,64&quot; stroke=&quot;#6656d4&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#d54a4a&quot;&gt;环比 -0.5%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;开播率&lt;/b&gt;&lt;span&gt;94.6&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,65 45,61 80,55 115,52 150,51 185,53 225,58&quot; stroke=&quot;#6656d4&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#d54a4a&quot;&gt;环比 -0.4%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;呼吸灯曝光&lt;/b&gt;&lt;span&gt;4,238&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,62 45,56 80,52 115,54 150,58 185,55 225,56&quot; stroke=&quot;#5d9f83&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#d54a4a&quot;&gt;环比 -5.9%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;直播卡曝光&lt;/b&gt;&lt;span&gt;5,406&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,63 45,60 80,58 115,55 150,53 185,49 225,42&quot; stroke=&quot;#5d9f83&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#159a68&quot;&gt;环比 +3.2%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;呼吸灯 CTR&lt;/b&gt;&lt;span&gt;1.51&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,57 45,58 80,56 115,54 150,52 185,48 225,44&quot; stroke=&quot;#5d9f83&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#159a68&quot;&gt;环比 +0.3%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;直播卡 CTR&lt;/b&gt;&lt;span&gt;3.28&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,48 45,46 80,45 115,44 150,45 185,47 225,58&quot; stroke=&quot;#5d9f83&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;div class=&quot;small&quot; style=&quot;color:#d54a4a&quot;&gt;环比 -0.3%&lt;/div&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;每播商家成交数&lt;/b&gt;&lt;span&gt;7.9&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,62 45,58 80,55 115,54 150,53 185,52 225,48&quot; stroke=&quot;#477abf&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;单商家日均开播时长&lt;/b&gt;&lt;span&gt;8.6&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,63 45,56 80,53 115,52 150,53 185,56 225,58&quot; stroke=&quot;#477abf&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;店播转化深度&lt;/b&gt;&lt;span&gt;14.7&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,62 45,58 80,57 115,54 150,53 185,51 225,44&quot; stroke=&quot;#477abf&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;div class=&quot;small-chart&quot;&gt;&lt;div class=&quot;head&quot;&gt;&lt;b&gt;店播客单价&lt;/b&gt;&lt;span&gt;14.9&lt;/span&gt;&lt;/div&gt;&lt;svg preserveaspectratio=&quot;none&quot; viewbox=&quot;0 0 240 90&quot;&gt;&lt;polyline fill=&quot;none&quot; points=&quot;10,54 45,51 80,50 115,50 150,51 185,55 225,61&quot; stroke=&quot;#477abf&quot; stroke-width=&quot;3&quot;&gt;&lt;/polyline&gt;&lt;/svg&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;table-card&quot; style=&quot;margin-top:14px&quot;&gt;
+&lt;div class=&quot;table-note&quot;&gt;&lt;b&gt;策略商家明细&lt;/b&gt; · 虚拟商家名 / 虚拟 AM&lt;/div&gt;
+&lt;div class=&quot;table-wrap&quot;&gt;
+&lt;table&gt;
+&lt;thead&gt;&lt;tr&gt;&lt;th&gt;商家&lt;/th&gt;&lt;th&gt;AM&lt;/th&gt;&lt;th&gt;行业&lt;/th&gt;&lt;th&gt;本期 DGMV&lt;/th&gt;&lt;th&gt;环比&lt;/th&gt;&lt;th&gt;开播率&lt;/th&gt;&lt;th&gt;CTR&lt;/th&gt;&lt;th&gt;CVR&lt;/th&gt;&lt;th&gt;状态&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;Northbay Studio&lt;/td&gt;&lt;td&gt;AM A&lt;/td&gt;&lt;td&gt;时尚消费&lt;/td&gt;&lt;td&gt;¥128.4K&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+12.8%&lt;/td&gt;&lt;td&gt;96.1%&lt;/td&gt;&lt;td&gt;3.4%&lt;/td&gt;&lt;td&gt;1.6%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;增长&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Olea Market&lt;/td&gt;&lt;td&gt;AM B&lt;/td&gt;&lt;td&gt;美妆个护&lt;/td&gt;&lt;td&gt;¥117.6K&lt;/td&gt;&lt;td style=&quot;color:#159a68&quot;&gt;+8.5%&lt;/td&gt;&lt;td&gt;94.2%&lt;/td&gt;&lt;td&gt;3.1%&lt;/td&gt;&lt;td&gt;1.4%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-green&quot;&gt;稳定&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Horizon Goods&lt;/td&gt;&lt;td&gt;AM C&lt;/td&gt;&lt;td&gt;家居生活&lt;/td&gt;&lt;td&gt;¥96.3K&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-4.3%&lt;/td&gt;&lt;td&gt;89.7%&lt;/td&gt;&lt;td&gt;2.6%&lt;/td&gt;&lt;td&gt;1.1%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-orange&quot;&gt;关注&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;Daylight Lab&lt;/td&gt;&lt;td&gt;AM D&lt;/td&gt;&lt;td&gt;食品饮料&lt;/td&gt;&lt;td&gt;¥88.9K&lt;/td&gt;&lt;td style=&quot;color:#d54a4a&quot;&gt;-9.6%&lt;/td&gt;&lt;td&gt;84.5%&lt;/td&gt;&lt;td&gt;2.2%&lt;/td&gt;&lt;td&gt;0.9%&lt;/td&gt;&lt;td&gt;&lt;span class=&quot;badge-status s-red&quot;&gt;风险&lt;/span&gt;&lt;/td&gt;&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;script&gt;
+(function(){
+  const mainTabs = document.querySelectorAll('#mainTabs .main-tab');
+  const panels = document.querySelectorAll('.content &gt; .panel');
+
+  function activateMain(key){
+    mainTabs.forEach(t=&gt;t.classList.toggle('active', t.dataset.main===key));
+    panels.forEach(p=&gt;p.classList.toggle('active', p.dataset.panel===key));
+  }
+  mainTabs.forEach(tab=&gt;tab.addEventListener('click', ()=&gt;activateMain(tab.dataset.main)));
+
+  function bindSubtab(containerSelector){
+    const container = document.querySelector(containerSelector);
+    if(!container) return;
+    const subtabs = container.querySelectorAll('.subtab');
+    const targetPanel = container.parentElement;
+    subtabs.forEach(st=&gt;{
+      st.addEventListener('click', ()=&gt;{
+        subtabs.forEach(x=&gt;x.classList.remove('active'));
+        st.classList.add('active');
+        const key = st.dataset.sub;
+        targetPanel.querySelectorAll('[data-subpanel]').forEach(sp=&gt;{
+          sp.classList.toggle('active', sp.dataset.subpanel===key);
+        });
+      });
+    });
+  }
+  bindSubtab('#overallSubtabs');
+  bindSubtab('#specialSubtabs');
+
+  const liveTabs = document.querySelectorAll('#liveTabs .main-tab');
+  const livePanels = document.querySelectorAll('[data-livepanel]');
+  liveTabs.forEach(tab=&gt;{
+    tab.addEventListener('click', ()=&gt;{
+      liveTabs.forEach(t=&gt;t.classList.remove('active'));
+      tab.classList.add('active');
+      livePanels.forEach(p=&gt;p.classList.toggle('active', p.dataset.livepanel===tab.dataset.live));
+    });
+  });
+
+})();
+&lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;" title="店播运营看板 Interactive Demo"></iframe><div class="dashboard-note">所有名称、人员、商家与数据均为脱敏 Mock Data；交互结构参考真实项目，但不包含公司内部数据。</div></div>
+</div>
+</section>
+<section class="pane" id="skills">
+<div class="section-head">
+<div class="section-index">04 / SKILLS</div>
+<h2>技能特长</h2>
+<p>尽量用更贴近岗位场景的方式组织技能，而不是简单列工具名词。既包括业务能力，也包括辅助执行的工具与表达能力。</p>
+</div>
+<div class="skills-grid"><div class="skill-box"><h3>数据分析</h3><div class="tags-list"><div class="tag">Excel：数据透视表 / VLOOKUP</div><div class="tag">SQL</div><div class="tag">从取数、分析到策略输出</div></div></div><div class="skill-box"><h3>电商运营</h3><div class="tags-list"><div class="tag">商家分层培育</div><div class="tag">批量化触达</div><div class="tag">BK 撮合</div><div class="tag">活动策划</div></div></div><div class="skill-box"><h3>AI 工具应用</h3><div class="tags-list"><div class="tag">AI 看板搭建</div><div class="tag">AI 内容标签体系</div><div class="tag">自动化推荐语</div><div class="tag">Prompt 编写</div></div></div><div class="skill-box"><h3>内容与工具</h3><div class="tags-list"><div class="tag">Canva</div><div class="tag">剪映</div><div class="tag">内容运营</div><div class="tag">CET-6 642</div></div></div></div>
+<div class="contact-card"><h3>联系我</h3><p>邮箱：<b>duyuening0198@163.com</b></p></div>
+</section>
+<div class="footer-note">Portfolio Demo · 所有项目中的业务名称、数据与对象均已脱敏重构，仅用于个人作品展示。</div>
+</div>
+<script>
+  const tabs = document.querySelectorAll('.nav-tab');
+  const panes = document.querySelectorAll('.pane');
+
+  function activatePane(id){
+    tabs.forEach(tab => tab.classList.toggle('active', tab.dataset.target === id));
+    panes.forEach(pane => pane.classList.toggle('active', pane.id === id));
+    window.scrollTo({top:0, behavior:'smooth'});
+  }
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => activatePane(tab.dataset.target));
+  });
+
+  document.querySelectorAll('.jump').forEach(btn => {
+    btn.addEventListener('click', () => activatePane(btn.dataset.target));
+  });
+
+  const switchBtns = document.querySelectorAll('.switch-btn');
+  const projectPanes = {
+    ad: document.getElementById('project-ad'),
+    live: document.getElementById('project-live')
+  };
+
+  switchBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      switchBtns.forEach(b => b.classList.toggle('active', b.dataset.project === btn.dataset.project));
+      Object.keys(projectPanes).forEach(key => {
+        projectPanes[key].classList.toggle('active', key === btn.dataset.project);
+      });
+    });
+  });
+</script>
+</body>
+</html>
